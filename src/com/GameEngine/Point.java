@@ -14,4 +14,6 @@ public class Point {
     public String toString() {
         return "Point: ( " + x + "; " + y + " )";
     }
+    //Comment New
+    //Comment New 2
 }
