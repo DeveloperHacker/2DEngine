@@ -2,6 +2,9 @@ package com.GameEngine;
 import java.util.ArrayList;
 
 public class World {
-    ArrayList<Object> level;
-    ArrayList<Object> current;
+    private ArrayList<Object> level;
+    private ArrayList<Object> current;
+    public World(ArrayList<Object> level) {
+
+    }
 }
