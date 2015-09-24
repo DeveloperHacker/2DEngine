@@ -15,5 +15,6 @@ public class Point {
         return "Point: ( " + x + "; " + y + " )";
         //Commment lasdasdasda
         //Comment sddfsdgsdfgdffgfdd
+        ///Comment sdfdsfsdafsdffdfsddsgdfgddgdgsdhj
     }
 }
