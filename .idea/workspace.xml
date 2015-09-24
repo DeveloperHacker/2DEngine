@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="33626931-f3e7-4a7f-bc1d-1844e54fd776" name="Default" comment="Update">
+    <list default="true" id="33626931-f3e7-4a7f-bc1d-1844e54fd776" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/GameEngine/Point.java" afterPath="$PROJECT_DIR$/src/com/GameEngine/Point.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="2DEngine.iws" />
@@ -77,8 +78,8 @@
       <file leaf-file-name="Point.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/GameEngine/Point.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.78061223">
-              <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.6505102">
+              <caret line="15" column="30" selection-start-line="15" selection-start-column="30" selection-end-line="15" selection-end-column="30" />
               <folding />
             </state>
           </provider>
@@ -121,7 +122,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="1b038b6292d782fccc52b8550ba1c07ef7c37ba8" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="PUSH_TAGS">
@@ -458,7 +459,13 @@
       <option name="project" value="LOCAL" />
       <updated>1443113398074</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Update">
+      <created>1443113516544</created>
+      <option name="number" value="00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1443113516544</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -899,8 +906,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/GameEngine/Point.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.78061223">
-          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.6505102">
+          <caret line="15" column="30" selection-start-line="15" selection-start-column="30" selection-end-line="15" selection-end-column="30" />
           <folding />
         </state>
       </provider>
