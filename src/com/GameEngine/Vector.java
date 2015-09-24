@@ -15,4 +15,5 @@ public class Vector {
         return Math.sqrt(v.x * v.x + v.y * v.y);
     }
     //Comment Master
+    //Comment Master 2
 }
