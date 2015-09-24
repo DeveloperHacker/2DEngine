@@ -15,4 +15,5 @@ public class Point {
         return "Point: ( " + x + "; " + y + " )";
     }
     //Comment New
+    //Comment New 2
 }
