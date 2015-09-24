@@ -40,7 +40,7 @@ public class Object {
     public void removeMaskFigure(Figure figure) { mask.remove(figure); }
     @Override
     public String toString() {
-        return "Object = [" +
+        return "Object: [" +
                 "'Pos = " + pos.toString() +
                 "', 'Height = " + h.abs() +
                 "', 'Width = " + w.abs() +

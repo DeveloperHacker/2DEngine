@@ -45,7 +45,7 @@ public class MovableObject extends Object {
     public Vector getNormal() { return n; }
     @Override
     public String toString() {
-        return "Object = [" +
+        return "MovableObject: [" +
                 "'Pos = " + pos.toString() +
                 "', 'Height = " + h.abs() +
                 "', 'Width = " + w.abs() +

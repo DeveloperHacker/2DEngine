@@ -8,4 +8,5 @@ public class Figure {
         this.pos = pos;
         vectors = vec;
     }
+    
 }
