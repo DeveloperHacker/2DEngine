@@ -41,7 +41,7 @@ public class Object {
     @Override
     public String toString() {
         return "Object: [" +
-                "'Pos = " + pos.toString() +
+                "'Position = " + pos.toString() +
                 "', 'Height = " + h.abs() +
                 "', 'Width = " + w.abs() +
                 "', 'Mask = " + mask.toString() +

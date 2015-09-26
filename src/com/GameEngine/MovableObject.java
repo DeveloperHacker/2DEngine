@@ -46,7 +46,7 @@ public class MovableObject extends Object {
     @Override
     public String toString() {
         return "MovableObject: [" +
-                "'Pos = " + pos.toString() +
+                "'Position = " + pos.toString() +
                 "', 'Height = " + h.abs() +
                 "', 'Width = " + w.abs() +
                 "', 'Mask = " + mask.toString() +
@@ -56,6 +56,6 @@ public class MovableObject extends Object {
                 "', 'Unfallen = " + unf +
                 "', 'Mass = " + m +
                 "', 'n = " + n.toString() +
-        "']";
+                "']";
     }
 }

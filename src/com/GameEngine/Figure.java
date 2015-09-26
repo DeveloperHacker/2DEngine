@@ -8,5 +8,14 @@ public class Figure {
         this.pos = pos;
         vectors = vec;
     }
-    
+    static boolean intersection(Figure _1, Figure _2){
+        return false;
+    }
+    @Override
+    public String toString() {
+        return "Figure: [" +
+                "'Position = " + pos.toString() +
+                "', 'Vectors = " + vectors.toString() +
+                "']";
+    }
 }
