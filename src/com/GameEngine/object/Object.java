@@ -1,4 +1,7 @@
-package com.GameEngine;
+package com.gameEngine.object;
+import com.gameEngine.math.Figure;
+import com.gameEngine.math.Point;
+import com.gameEngine.math.Vector;
 import java.util.ArrayList;
 
 public class Object {
@@ -39,12 +42,33 @@ public class Object {
     public double getK() { return k; }
     public void removeMaskFigure(Figure figure) { mask.remove(figure); }
     @Override
+    public boolean equals(java.lang.Object obj) {
+        return ((com.gameEngine.object.MovableObject)obj).pos.equals(pos)
+                && ((com.gameEngine.object.MovableObject)obj).k == k
+                && ((com.gameEngine.object.MovableObject)obj).h.equals(h)
+                && ((com.gameEngine.object.MovableObject)obj).w.equals(w)
+                && ((com.gameEngine.object.MovableObject)obj).mask.equals(mask);
+    }
+    @Override
+    public int hashCode() {
+        final int a = 3;
+        final int b = 5;
+        final int c = 7;
+        final int d = 11;
+        final int e = 13;
+        final int f = 17;
+        return a + b * pos.hashCode() + c * (int)k + f * h.hashCode() + d * w.hashCode() + e * mask.hashCode();
+    }
+    @Override
+    public java.lang.Object clone() {
+        return new Object(this);
+    }
+    @Override
     public String toString() {
-        return "Object: [" +
-                "'Position = " + pos.toString() +
+        return "[" + "'Position = " + pos +
                 "', 'Height = " + h.abs() +
                 "', 'Width = " + w.abs() +
-                "', 'Mask = " + mask.toString() +
+                "', 'Mask = " + mask +
                 "', 'K = " + k + "']";
     }
 }

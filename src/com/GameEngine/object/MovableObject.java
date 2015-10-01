@@ -1,4 +1,5 @@
-package com.GameEngine;
+package com.gameEngine.object;
+import com.gameEngine.math.*;
 import java.util.ArrayList;
 
 public class MovableObject extends Object {
@@ -44,9 +45,29 @@ public class MovableObject extends Object {
     public double getMass() { return m; }
     public Vector getNormal() { return n; }
     @Override
+    public boolean equals(java.lang.Object obj) {
+        return ((MovableObject)obj).s.equals(s)
+                && ((MovableObject)obj).hp == hp
+                && ((MovableObject)obj).unf == unf
+                && ((MovableObject)obj).m == m
+                && ((MovableObject)obj).n.equals(n);
+    }
+    @Override
+    public int hashCode() {
+        final int a = 37;
+        final int b = 19;
+        final int c = 23;
+        final int d = 29;
+        final int e = 31;
+        return super.hashCode() + a * s.hashCode() + b * (int)hp + c * (unf ? 1 : 0) + d * (int)m + e * n.hashCode();
+    }
+    @Override
+    public java.lang.Object clone() {
+        return new MovableObject(this);
+    }
+    @Override
     public String toString() {
-        return "MovableObject: [" +
-                "'Position = " + pos.toString() +
+        return "[" + "'Position = " + pos.toString() +
                 "', 'Height = " + h.abs() +
                 "', 'Width = " + w.abs() +
                 "', 'Mask = " + mask.toString() +
@@ -55,7 +76,6 @@ public class MovableObject extends Object {
                 "', 'Hp = " + hp +
                 "', 'Unfallen = " + unf +
                 "', 'Mass = " + m +
-                "', 'n = " + n.toString() +
-                "']";
+                "', 'n = " + n.toString() + "']";
     }
 }
