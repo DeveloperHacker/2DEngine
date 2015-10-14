@@ -9,6 +9,11 @@ public class Line {
         B = line.B;
         C = line.C;
     }
+    public Line(Section section) {
+        this.A = section._2.y - section._1.y;
+        this.B = section._1.x - section._2.x;
+        this.C = section._1.x * section._2.y - section._2.y * section._1.x;
+    }
     public Line(double A, double B, double C) throws Exception {
         this.A = A;
         this.B = B;
@@ -21,7 +26,7 @@ public class Line {
     public double solve(double x, double y) {
         return A*x + B*y + C;
     }
-    static boolean intersection(Line _1, Line _2) {
+    public static boolean intersection(Line _1, Line _2) {
         return !(_1.A/_2.A == _1.B/_2.B);
     }
     @Override

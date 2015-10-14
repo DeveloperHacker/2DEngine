@@ -7,19 +7,25 @@ public class Section{
         _1 = section._1;
         _2 = section._2;
     }
-    public Section(Point _1, Point _2) {
+    public Section(Point _1, Point _2) throws Exception {
         this._1 = _1;
         this._2 = _2;
+        if(_1 == _2) throw new Exception("Error: Section:" + this.toString());
     }
-    public Section(double x_1, double y_1, double x_2, double y_2) {
+    public Section(double x_1, double y_1, double x_2, double y_2) throws Exception {
         _1 = new Point(x_1, y_1);
         _2 = new Point(x_2, y_2);
+        if(_1 == _2) throw new Exception("Error: Section:" + this.toString());
     }
-    public Line toLine() throws Exception {
-        return new Line(-_2.y + _1.y, -_1.x + _2.x, _1.x*_2.y - _2.x*_1.y);
+    public Line toLine() {
+        return new Line(this);
     }
-    static boolean intersection(Section _1, Section _2){
-        return false;
+    public static boolean intersection(Section _1, Section _2){
+        Line line = _1.toLine();
+        if (line.solve(_2._1)*line.solve(_2._2) >= 0) return false;
+        line = _2.toLine();
+        if (line.solve(_1._1)*line.solve(_1._2) >= 0) return false;
+        return true;
     }
     @Override
      public boolean equals(java.lang.Object obj) {
