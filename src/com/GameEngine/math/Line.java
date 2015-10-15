@@ -31,7 +31,15 @@ public class Line {
     }
     @Override
     public boolean equals(java.lang.Object obj) {
-        return (((Line)obj).A == A) && (((Line)obj).B == B) && (((Line)obj).C == C);
+        if (this == obj) return true;
+        if (obj instanceof Figure) {
+            Line line = (Line)obj;
+            if (!(line.A == A)) return false;
+            if (!(line.B == B)) return false;
+            if (!(line.C == C)) return false;
+            return true;
+        }
+        else return false;
     }
     @Override
     public int hashCode() {

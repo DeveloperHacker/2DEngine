@@ -17,7 +17,14 @@ public class Point {
     }
     @Override
     public boolean equals(java.lang.Object obj) {
-        return (((Point)obj).x == x) && (((Point)obj).y == y);
+        if (this == obj) return true;
+        if (obj instanceof Figure) {
+            Point point = (Point)obj;
+            if (!(point.x == x)) return false;
+            if (!(point.y == y)) return false;
+            return true;
+        }
+        else return false;
     }
     @Override
     public int hashCode() {

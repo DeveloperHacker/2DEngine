@@ -5,13 +5,20 @@ public class Figure {
     public final Point pos;
     public final ArrayList<Vector> vectors;
     public final String name;
+    public final double square;
+    public final Point center;
     public Figure(Figure figure, String name) {
         pos = figure.pos;
+        square = figure.square;
+        center = figure.center;
         vectors = new ArrayList<>(figure.vectors);
         this.name = name;
     }
     public Figure(Point pos, ArrayList<Vector> vec, String name) throws Exception {
         this.pos = pos;
+        if (vec.size() < 3) throw new Exception("Figure " + name + ".square = 0.");
+        square = calcSquare();
+        center = calcCenter();
         Vector sum = vec.get(0);
         for (int i = 1; i < vec.size(); ++i) sum = Vector.add(sum, vec.get(i));
         if (!sum.equals(new Vector())) throw new Exception("Figure " + name + " is not closed.");
@@ -31,6 +38,20 @@ public class Figure {
         }
         return true;
     }
+    private double calcSquare() {
+        return 0;
+    }
+    private Point calcCenter() {
+        Vector current = vectors.get(0);
+        double x = current.pos.x;
+        double y = current.pos.y;
+        for (int i = 1; i < vectors.size(); ++i) {
+            current = Vector.rem(current, vectors.get(i));
+            x += current.pos.x;
+            y += current.pos.y;
+        }
+        return new Point(x * vectors.size(), y * vectors.size());
+    }
     public static boolean intersection(Figure _1, Figure _2) {
         Vector prev = new Vector();
         for(Vector vector: _1.vectors) {
@@ -46,7 +67,14 @@ public class Figure {
     }
     @Override
     public boolean equals(java.lang.Object obj) {
-        return ((Figure)obj).pos.equals(pos) && ((Figure)obj).vectors.equals(vectors);
+        if (this == obj) return true;
+        if (obj instanceof Figure) {
+            Figure figure = (Figure) obj;
+            if (!figure.pos.equals(pos)) return false;
+            if (!figure.vectors.equals(vectors)) return false;
+            return true;
+        }
+        else return false;
     }
     @Override
     public int hashCode() {

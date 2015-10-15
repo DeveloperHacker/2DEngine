@@ -29,7 +29,14 @@ public class Section{
     }
     @Override
      public boolean equals(java.lang.Object obj) {
-        return (((Section)obj)._1.equals(_1)) && (((Section)obj)._2.equals(_2));
+        if (this == obj) return true;
+        if (obj instanceof Figure) {
+            Section section = (Section)obj;
+            if (!section._1.equals(_1)) return false;
+            if (!section._2.equals(_2)) return false;
+            return true;
+        }
+        else return false;
     }
     @Override
     public int hashCode() {

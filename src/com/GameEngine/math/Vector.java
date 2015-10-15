@@ -34,7 +34,13 @@ public class Vector {
     }
     @Override
     public boolean equals(java.lang.Object obj) {
-        return (((Vector)obj).pos.equals(pos));
+        if (this == obj) return true;
+        if (obj instanceof Figure) {
+            Vector vector = (Vector)obj;
+            if (!vector.pos.equals(pos)) return false;
+            return true;
+        }
+        else return false;
     }
     @Override
     public int hashCode() {
