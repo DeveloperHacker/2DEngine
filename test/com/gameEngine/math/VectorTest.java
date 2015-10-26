@@ -1,4 +1,5 @@
 package com.gameEngine.math;
+
 import org.junit.Test;
 
 public class VectorTest {
@@ -6,6 +7,7 @@ public class VectorTest {
     public void mainMethods() {
         try {
 
-        } catch (Exception ignored) { }
+        } catch (Exception ignored) {
+        }
     }
 }
