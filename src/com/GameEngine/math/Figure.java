@@ -1,4 +1,5 @@
 package com.gameEngine.math;
+
 import java.util.ArrayList;
 
 public class Figure {
@@ -7,6 +8,7 @@ public class Figure {
     public final String name;
     public final double square;
     public final Point center;
+
     public Figure(Figure figure, String name) {
         pos = figure.pos;
         square = figure.square;
@@ -14,6 +16,7 @@ public class Figure {
         vectors = new ArrayList<>(figure.vectors);
         this.name = name;
     }
+
     public Figure(Point pos, ArrayList<Vector> vec, String name) throws Exception {
         this.pos = pos;
         if (vec.size() < 3) throw new Exception("Figure " + name + ".square = 0.");
@@ -24,11 +27,12 @@ public class Figure {
         if (!sum.equals(new Vector())) throw new Exception("Figure " + name + " is not closed.");
         double direct = Vector.vectorMul(vec.get(vec.size() - 1), vec.get(0));
         for (int i = 1; i < vec.size(); ++i)
-            if (0 > direct * Vector.vectorMul(vec.get(i - 1),vec.get(i)))
+            if (0 > direct * Vector.vectorMul(vec.get(i - 1), vec.get(i)))
                 throw new Exception("Figure " + name + " is not convex.");
         vectors = new ArrayList<>(vec);
         this.name = name;
     }
+
     public boolean isInside(Point point) {
         Vector m = new Vector(point.x - pos.x, point.y - pos.y);
         double direct = Vector.vectorMul(m, vectors.get(0));
@@ -38,9 +42,11 @@ public class Figure {
         }
         return true;
     }
+
     private double calcSquare() {
         return 0;
     }
+
     private Point calcCenter() {
         Vector current = vectors.get(0);
         double x = current.pos.x;
@@ -52,41 +58,43 @@ public class Figure {
         }
         return new Point(x * vectors.size(), y * vectors.size());
     }
+
     public static boolean intersection(Figure _1, Figure _2) {
         Vector prev = new Vector();
-        for(Vector vector: _1.vectors) {
+        for (Vector vector : _1.vectors) {
             prev = Vector.add(prev, vector);
-            if(_2.isInside(new Point(_1.pos.x + prev.pos.x, _1.pos.y + prev.pos.y))) return true;
+            if (_2.isInside(new Point(_1.pos.x + prev.pos.x, _1.pos.y + prev.pos.y))) return true;
         }
         prev = new Vector();
-        for(Vector vector: _2.vectors) {
+        for (Vector vector : _2.vectors) {
             prev = Vector.add(prev, vector);
             if (_1.isInside(new Point(_2.pos.x + prev.pos.x, _2.pos.y + prev.pos.y))) return true;
         }
         return false;
     }
+
     @Override
     public boolean equals(java.lang.Object obj) {
         if (this == obj) return true;
         if (obj instanceof Figure) {
             Figure figure = (Figure) obj;
-            if (!figure.pos.equals(pos)) return false;
-            if (!figure.vectors.equals(vectors)) return false;
-            return true;
-        }
-        else return false;
+            return figure.pos.equals(pos) && figure.vectors.equals(vectors);
+        } else return false;
     }
+
     @Override
     public int hashCode() {
-        final int a = 5;
-        final int b = 7;
-        final int c = 11;
-        return a + b * pos.hashCode() + c * vectors.hashCode();
+        int result;
+        long temp;
+        result = pos.hashCode();
+        result = 31 * result + vectors.hashCode();
+        result = 31 * result + name.hashCode();
+        temp = Double.doubleToLongBits(square);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + center.hashCode();
+        return result;
     }
-    @Override
-    public java.lang.Object clone() {
-        return new Figure(this, name + "Clone");
-    }
+
     @Override
     public String toString() {
         return "[" + "'Position = " + pos + "', 'Vectors = " + vectors + "']";
