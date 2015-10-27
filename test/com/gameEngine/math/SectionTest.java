@@ -12,7 +12,7 @@ public class SectionTest {
             assert (section1.equals(section1));
             assert (section1.equals(section2));
             assert (section1.equals(section3));
-//            assert (Section.intersection(section1, section2));
+            assert (Section.intersection(section1, section2));
             Section section4 = new Section(5, 2, 4, 4);
             Section section5 = new Section(7, 3, 7, 3);
             assert (Section.intersection(section1, section4));
