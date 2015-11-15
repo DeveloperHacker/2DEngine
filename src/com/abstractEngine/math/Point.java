@@ -1,4 +1,4 @@
-package com.gameEngine.math;
+package com.abstractEngine.math;
 
 public class Point {
     public final double x;
@@ -17,6 +17,14 @@ public class Point {
     public Point(double x, double y) {
         this.x = x;
         this.y = y;
+    }
+
+    public static Point add(Point _1, Point _2) {
+        return new Point(_1.x + _2.x, _1.y + _2.y);
+    }
+
+    public static Point rem(Point _1, Point _2) {
+        return new Point(_1.x - _2.x, _1.y - _2.y);
     }
 
     @Override

@@ -1,36 +1,32 @@
-package com.gameEngine.math;
+package com.abstractEngine.math;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Figure {
-    public final Point pos;
-    public final ArrayList<Vector> vectors;
-    public final String name;
-    public final double square;
-    public final Point center;
 
-    public Figure(Figure figure, String name) {
+    private Point pos;
+    private List<Vector> vectors;
+    public Point center;
+
+    public Figure(Figure figure) {
         pos = figure.pos;
-        square = figure.square;
         center = figure.center;
         vectors = new ArrayList<>(figure.vectors);
-        this.name = name;
     }
 
-    public Figure(Point pos, ArrayList<Vector> vec, String name) throws Exception {
+    public Figure(Point pos, List<Vector> vec) throws IllegalArgumentException {
         this.pos = pos;
-        if (vec.size() < 3) throw new Exception("Figure " + name + ".square = 0.");
-        square = calcSquare();
-        center = calcCenter();
+        if (vec.size() < 3) throw new IllegalArgumentException();
         Vector sum = vec.get(0);
         for (int i = 1; i < vec.size(); ++i) sum = Vector.add(sum, vec.get(i));
-        if (!sum.equals(new Vector())) throw new Exception("Figure " + name + " is not closed.");
+        if (!sum.equals(new Vector())) throw new IllegalArgumentException("Figure is not closed.");
         double direct = Vector.vectorMul(vec.get(vec.size() - 1), vec.get(0));
         for (int i = 1; i < vec.size(); ++i)
             if (0 > direct * Vector.vectorMul(vec.get(i - 1), vec.get(i)))
-                throw new Exception("Figure " + name + " is not convex.");
+                throw new IllegalArgumentException("Figure is not convex.");
         vectors = new ArrayList<>(vec);
-        this.name = name;
+        center = calcCenter();
     }
 
     public boolean isInside(Point point) {
@@ -41,10 +37,6 @@ public class Figure {
             if (0 > direct * Vector.vectorMul(m, vectors.get(i))) return false;
         }
         return true;
-    }
-
-    private double calcSquare() {
-        return 0;
     }
 
     private Point calcCenter() {
@@ -73,25 +65,47 @@ public class Figure {
         return false;
     }
 
+    public static boolean intersection(Figure _1, Polyline _2) {
+        return Polyline.intersection(_2, _1);
+    }
+
+    public static boolean intersection(Figure _1, Section _2) {
+        return _1.isInside(_2._1) || _1.isInside(_2._2);
+    }
+
+    public static boolean intersection(Figure _1, Line _2) {
+        Point prev = _1.pos;
+        for (Vector vector : _1.vectors) {
+            if (Section.intersection(new Section(prev, vector.pos), _2)) return true;
+            prev = vector.pos;
+        }
+        return false;
+    }
+
+    public void setPos(Point pos) {
+        this.pos = pos;
+    }
+
+    public Point pos() {
+        return pos;
+    }
+
+    public List<Vector> vectors() {
+        return new ArrayList<>(vectors);
+    }
+
     @Override
     public boolean equals(java.lang.Object obj) {
         if (this == obj) return true;
-        if (obj instanceof Figure) {
-            Figure figure = (Figure) obj;
-            return figure.pos.equals(pos) && figure.vectors.equals(vectors);
-        } else return false;
+        if (!(obj instanceof Figure)) return false;
+        Figure figure = (Figure) obj;
+        return figure.vectors.equals(vectors);
     }
 
     @Override
     public int hashCode() {
         int result;
-        long temp;
-        result = pos.hashCode();
-        result = 31 * result + vectors.hashCode();
-        result = 31 * result + name.hashCode();
-        temp = Double.doubleToLongBits(square);
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
-        result = 31 * result + center.hashCode();
+        result = vectors.hashCode();
         return result;
     }
 

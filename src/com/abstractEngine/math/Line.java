@@ -1,4 +1,4 @@
-package com.gameEngine.math;
+package com.abstractEngine.math;
 
 public class Line {
     public final double A;
@@ -14,14 +14,14 @@ public class Line {
     public Line(Section section) {
         this.A = section._2.y - section._1.y;
         this.B = section._1.x - section._2.x;
-        this.C = - section._1.x * section._2.y + section._2.x * section._1.y;
+        this.C = -section._1.x * section._2.y + section._2.x * section._1.y;
     }
 
-    public Line(double A, double B, double C) throws Exception {
+    public Line(double A, double B, double C) throws IllegalArgumentException {
         this.A = A;
         this.B = B;
         this.C = C;
-        if ((A == 0) && (B == 0)) throw new Exception("Error: Line:" + this.toString());
+        if ((A == 0) && (B == 0)) throw new IllegalArgumentException("Error: Line:" + this.toString());
     }
 
     public double solve(Point p) {
@@ -32,8 +32,28 @@ public class Line {
         return A * x + B * y + C;
     }
 
+    public double y(double x) {
+        return -A / B * x - C / B;
+    }
+
+    public double x(double y) {
+        return -B / A * y - C / A;
+    }
+
     public static boolean intersection(Line _1, Line _2) {
         return (_1.equals(_2)) || (_1.A * _2.B != _1.B * _2.A);
+    }
+
+    public static boolean intersection(Line _1, Section _2) {
+        return (_1.solve(_2._1) * _1.solve(_2._2) < 0);
+    }
+
+    public static boolean intersection(Line _1, Figure _2) {
+        return (Figure.intersection(_2, _1));
+    }
+
+    public static boolean intersection(Line _1, Polyline _2) {
+        return Polyline.intersection(_2, _1);
     }
 
     @Override
@@ -41,7 +61,7 @@ public class Line {
         if (this == obj) return true;
         if (obj instanceof Line) {
             Line line = (Line) obj;
-            return (line.A == A) && (line.B == B) && (line.C == C);
+            return (line.A * B == line.B * A) && (line.C * B == line.B * C);
         } else return false;
     }
 

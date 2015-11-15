@@ -1,10 +1,11 @@
-package com.gameEngine.math;
+package com.abstractEngine.math;
 
 import org.junit.Test;
 
 public class SectionTest {
     @Test
     public void mainMethods() {
+        boolean catchIllegalArgumentException = false;
         try {
             Section section1 = new Section(2, 1, 8, 5);
             Section section2 = new Section(new Point(2, 1), new Point(8, 5));
@@ -17,7 +18,9 @@ public class SectionTest {
             Section section5 = new Section(7, 3, 7, 3);
             assert (Section.intersection(section1, section4));
             assert (!Section.intersection(section1, section5));
-        } catch (Exception ignored) {
+        } catch (IllegalArgumentException ignored) {
+            catchIllegalArgumentException = true;
         }
+        assert (!catchIllegalArgumentException);
     }
 }

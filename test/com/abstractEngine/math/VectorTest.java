@@ -1,10 +1,11 @@
-package com.gameEngine.math;
+package com.abstractEngine.math;
 
 import org.junit.Test;
 
 public class VectorTest {
     @Test
     public void mainMethods() {
+        boolean catchIllegalArgumentException = false;
         try {
             Vector vector1 = new Vector(10, 6);
             Vector vector2 = new Vector(new Point(10, 6));
@@ -24,7 +25,9 @@ public class VectorTest {
             assert (Vector.rem(vector1, vector4).equals(new Vector(10, -4)));
             assert (Vector.add(vector1, vector3).equals(new Vector(4, 16)));
             assert (Vector.rem(vector1, vector3).equals(new Vector(16, -4)));
-        } catch (Exception ignored) {
+        } catch (IllegalArgumentException ignored) {
+            catchIllegalArgumentException = true;
         }
+        assert (!catchIllegalArgumentException);
     }
 }

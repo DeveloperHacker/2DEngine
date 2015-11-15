@@ -1,6 +1,7 @@
-package com.gameEngine.math;
+package com.abstractEngine.math;
 
 public class Vector {
+    public static final double EPSILON = 0.02;
     public final Point pos;
 
     public Vector() {
