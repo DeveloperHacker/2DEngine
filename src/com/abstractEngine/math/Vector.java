@@ -24,8 +24,24 @@ public class Vector {
         return Math.sqrt(pos.x * pos.x + pos.y * pos.y);
     }
 
+    public Vector mul(double num) {
+        return new Vector(pos.x * num, pos.y * num);
+    }
+
+    public Vector minus() {
+        return Vector.rem(new Vector(), this);
+    }
+
     public static Vector add(Vector _1, Vector _2) {
         return new Vector(_1.pos.x + _2.pos.x, _1.pos.y + _2.pos.y);
+    }
+
+    public double x(){
+        return pos.x;
+    }
+
+    public double y(){
+        return pos.y;
     }
 
     public static Vector rem(Vector _1, Vector _2) {

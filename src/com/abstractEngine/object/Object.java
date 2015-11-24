@@ -4,46 +4,43 @@ import com.abstractEngine.math.Figure;
 import com.abstractEngine.math.Point;
 import com.abstractEngine.math.Vector;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Object {
     private Point pos;
-    private List<Figure> mask;
+    private Figure mask;
     private double mass;
     private Vector speed;
+    private final boolean movable;
     private final String name;
 
-    public Object(Object object) {
-        pos = object.pos;
-        mask = object.mask;
-        mass = object.mass;
-        speed = object.speed;
-        name = object.name;
+    public Object(Object object, boolean movable) {
+        this.pos = object.pos;
+        this.mask = object.mask;
+        this.mass = object.mass;
+        this.speed = object.speed;
+        this.name = object.name;
+        this.movable = movable;
     }
 
-    public Object(Point pos, List<Figure> mask, double mass, Vector speed, String name) {
+    public Object(Point pos, Figure mask, double mass, Vector speed, boolean movable, String name) {
         this.pos = pos;
         this.mask = mask;
         this.mass = mass;
         this.speed = speed;
         this.name = name;
+        this.movable = movable;
     }
 
-    public Object(Point pos, List<Figure> mask, double mass, String name) {
+    public Object(Point pos, Figure mask, double mass, boolean movable, String name) {
         this.pos = pos;
         this.mask = mask;
         this.mass = mass;
         this.speed = new Vector();
         this.name = name;
+        this.movable = movable;
     }
 
-    public Object(Point pos, double mass, String name) {
-        this.pos = pos;
-        this.mask = new ArrayList<>();
-        this.mass = mass;
-        this.speed = new Vector();
-        this.name = name;
+    public void setMask(Figure mask) {
+        this.mask = new Figure(mask);
     }
 
     public void setPos(Point pos) {
@@ -58,12 +55,8 @@ public class Object {
         this.speed = speed;
     }
 
-    public void add(Figure figure) {
-        mask.add(figure);
-    }
-
-    public List<Figure> mask() {
-        return mask;
+    public Figure mask() {
+        return new Figure(mask);
     }
 
     public Point pos() {
@@ -80,6 +73,10 @@ public class Object {
 
     public String name() {
         return name;
+    }
+
+    public boolean movable() {
+        return movable;
     }
 
     @Override
@@ -99,6 +96,6 @@ public class Object {
 
     @Override
     public String toString() {
-        return "[" + "'Position = " + pos + "', 'Mask = " + mask + "', 'K = " + mass + "']";
+        return "['Speed = " + speed + "', 'Position = " + pos + "', 'Mask = " + mask + "', 'Mass = " + mass + "']";
     }
 }

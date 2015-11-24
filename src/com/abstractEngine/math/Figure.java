@@ -10,57 +10,100 @@ public class Figure {
     public Point center;
 
     public Figure(Figure figure) {
-        pos = figure.pos;
-        center = figure.center;
-        vectors = new ArrayList<>(figure.vectors);
+        this.pos = figure.pos;
+        this.center = figure.center;
+        this.vectors = new ArrayList<>(figure.vectors);
+    }
+
+    public Figure(Point pos, Figure figure) {
+        this.pos = pos;
+        this.center = figure.center;
+        this.vectors = new ArrayList<>(figure.vectors);
     }
 
     public Figure(Point pos, List<Vector> vec) throws IllegalArgumentException {
         this.pos = pos;
         if (vec.size() < 3) throw new IllegalArgumentException();
+        double accuracy = 0.00001;
         Vector sum = vec.get(0);
         for (int i = 1; i < vec.size(); ++i) sum = Vector.add(sum, vec.get(i));
-        if (!sum.equals(new Vector())) throw new IllegalArgumentException("Figure is not closed.");
-        double direct = Vector.vectorMul(vec.get(vec.size() - 1), vec.get(0));
-        for (int i = 1; i < vec.size(); ++i)
-            if (0 > direct * Vector.vectorMul(vec.get(i - 1), vec.get(i)))
-                throw new IllegalArgumentException("Figure is not convex.");
-        vectors = new ArrayList<>(vec);
-        center = calcCenter();
+        if (sum.abs() > accuracy) throw new IllegalArgumentException("Figure is not closed.");
+        this.vectors = new ArrayList<>(vec);
+        this.center = calcCenter();
+    }
+
+    public boolean convex() {
+        double direct = Vector.vectorMul(vectors.get(vectors.size() - 1), vectors.get(0));
+        for (int i = 1; i < vectors.size(); ++i)
+            if (0 > direct * Vector.vectorMul(vectors.get(i - 1), vectors.get(i)))
+                return false;
+        return true;
+    }
+
+    public double height() {
+        Vector prev = new Vector(pos);
+        double min = prev.y();
+        double max = prev.y();
+        for (Vector vector : vectors) {
+            prev = Vector.add(prev, vector);
+            if (prev.y() > max) max = prev.y();
+            if (prev.y() < min) min = prev.y();
+        }
+        return Math.abs(max - min);
+    }
+
+    public double width() {
+        Vector prev = new Vector(pos);
+        double min = prev.x();
+        double max = prev.x();
+        for (Vector vector : vectors) {
+            prev = Vector.add(prev, vector);
+            if (prev.x() > max) max = prev.x();
+            if (prev.x() < min) min = prev.x();
+        }
+        return Math.abs(max - min);
     }
 
     public boolean isInside(Point point) {
-        Vector m = new Vector(point.x - pos.x, point.y - pos.y);
-        double direct = Vector.vectorMul(m, vectors.get(0));
-        for (int i = 1; i < vectors.size(); ++i) {
-            m = Vector.rem(m, vectors.get(i - 1));
-            if (0 > direct * Vector.vectorMul(m, vectors.get(i))) return false;
+        Vector m = Vector.rem(new Vector(point), new Vector(pos));
+        double direct = 0, temp = 0;
+        boolean init = false;
+        for (Vector vector : vectors) {
+            temp = Vector.vectorMul(vector, m);
+            m = Vector.rem(m, vector);
+            if (temp != 0) {
+                if (!init) {
+                    init = true;
+                } else if (direct * temp < 0)
+                    return false;
+                direct = temp;
+            }
         }
         return true;
     }
 
     private Point calcCenter() {
-        Vector current = vectors.get(0);
-        double x = current.pos.x;
-        double y = current.pos.y;
-        for (int i = 1; i < vectors.size(); ++i) {
-            current = Vector.rem(current, vectors.get(i));
-            x += current.pos.x;
-            y += current.pos.y;
+        Point prev = pos;
+        double x = prev.x;
+        double y = prev.y;
+        for (int i = 0; i < vectors.size() - 1; ++i) {
+            prev = Point.add(prev, vectors.get(i).pos);
+            x += prev.x;
+            y += prev.y;
         }
-        return new Point(x * vectors.size(), y * vectors.size());
+        return new Point(x / vectors.size(), y / vectors.size());
     }
 
     public static boolean intersection(Figure _1, Figure _2) {
-        Vector prev = new Vector();
+        Vector prev = new Vector(_1.pos());
         for (Vector vector : _1.vectors) {
             prev = Vector.add(prev, vector);
-            if (_2.isInside(new Point(_1.pos.x + prev.pos.x, _1.pos.y + prev.pos.y))) return true;
+            if (_2.isInside(prev.pos)) return true;
         }
-        prev = new Vector();
+        prev = new Vector(_2.pos());
         for (Vector vector : _2.vectors) {
             prev = Vector.add(prev, vector);
-            if (_1.isInside(new Point(_2.pos.x + prev.pos.x, _2.pos.y + prev.pos.y))) return true;
+            if (_1.isInside(prev.pos)) return true;
         }
         return false;
     }
@@ -111,6 +154,6 @@ public class Figure {
 
     @Override
     public String toString() {
-        return "[" + "'Position = " + pos + "', 'Vectors = " + vectors + "']";
+        return "[" + "'Position = " + pos + "', 'Vectors = " + vectors + "', 'Center = " + center + "']";
     }
 }
