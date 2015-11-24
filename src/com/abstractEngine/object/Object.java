@@ -21,6 +21,15 @@ public class Object {
         this.movable = movable;
     }
 
+    public Object(Object object) {
+        this.pos = object.pos;
+        this.mask = object.mask;
+        this.mass = object.mass;
+        this.speed = object.speed;
+        this.name = object.name;
+        this.movable = object.movable;
+    }
+
     public Object(Point pos, Figure mask, double mass, Vector speed, boolean movable, String name) {
         this.pos = pos;
         this.mask = mask;

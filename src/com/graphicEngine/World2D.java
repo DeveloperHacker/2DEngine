@@ -15,24 +15,26 @@ public class World2D {
     public List<Object2D> objects;
 
     private Figure screen;
-    public static final int SCALE = 70;
-    public static final int WIDTH = 16 * SCALE;
-    public static final int HEIGHT = 9 * SCALE;
+    public final int width;
+    public final int height;
 
-    public static final int cycleTime = 15;
+    public static final int cycleTime = 10;
 
-    {
+    private void initScreen() {
         List<Vector> vectors = new ArrayList<>();
-        vectors.add(new Vector(WIDTH, 0));
-        vectors.add(new Vector(0, HEIGHT));
-        vectors.add(new Vector(-WIDTH, 0));
-        vectors.add(new Vector(0, -HEIGHT));
+        vectors.add(new Vector(width, 0));
+        vectors.add(new Vector(0, height));
+        vectors.add(new Vector(-width, 0));
+        vectors.add(new Vector(0, -height));
         screen = new Figure(new Point(0, 0), vectors);
         objects = new ArrayList<>();
     }
 
-    public World2D() {
-        world = new World();
+    public World2D(World world, int width, int height) {
+        initScreen();
+        this.world = world;
+        this.width = width;
+        this.height = height;
     }
 
     public void add(Object2D object) {
@@ -42,8 +44,7 @@ public class World2D {
 
     public void show(Graphics graphics) {
         for (Object2D object : objects) {
-            object.show(graphics, screen.pos(), HEIGHT, WIDTH);
-            object.showOutline(graphics, Point.rem(screen.pos(), object.object.pos()), HEIGHT, WIDTH);
+            object.show(graphics, screen.pos(), height, width);
         }
     }
 
