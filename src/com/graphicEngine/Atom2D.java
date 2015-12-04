@@ -47,5 +47,8 @@ public class Atom2D implements View {
     @Override
     public void show(Graphics graphics, Point posScreen, int height, int width) {
         background.show(graphics, atom.pos().rem(posScreen), height, width);
+        new Figure2D(atom.mask(), Color.WHITE).show(graphics, atom.pos().rem(posScreen), height, width);
+        graphics.setColor(Color.BLUE);
+        graphics.drawLine(0, 0, (int)(atom.pos().rem(posScreen).x), (int)(atom.pos().rem(posScreen).y));
     }
 }

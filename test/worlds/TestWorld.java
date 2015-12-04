@@ -1,6 +1,7 @@
 package worlds;
 
 import com.abstractEngine.World;
+import com.abstractEngine.math.Point;
 import com.abstractEngine.math.Vector;
 import com.abstractEngine.object.Atom;
 
@@ -20,6 +21,7 @@ public class TestWorld extends World {
         final Vector G = new Vector(0, 0.2);
         final double maxSpeed = 20;
         final double damping = 0.98;
+        Point pos;
         for (Atom atom : atoms) {
             if (atom.movable()) {
                 atom.set(atom.speed().add(G));
