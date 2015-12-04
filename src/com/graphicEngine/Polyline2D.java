@@ -7,7 +7,7 @@ import com.abstractEngine.math.Vector;
 import java.awt.*;
 import java.util.List;
 
-public class Polyline2D implements GraphicsModel {
+public class Polyline2D implements View {
     public final Polyline polyline;
     private Color outlineColor;
 
@@ -25,8 +25,8 @@ public class Polyline2D implements GraphicsModel {
     public void show(Graphics graphics, Point posScreen, int height, int width) {
         Point prev = polyline.pos();
         for (Vector vector : polyline.vectors()) {
-            new Section2D(prev, vector.pos, outlineColor).show(graphics, posScreen, height, width);
-            prev = vector.pos;
+            new Section2D(prev, vector, outlineColor).show(graphics, posScreen, height, width);
+            prev = vector;
         }
     }
 }

@@ -12,7 +12,7 @@ import java.util.List;
 public class World2D {
 
     public final World world;
-    public List<Object2D> objects;
+    public List<Atom2D> objects;
 
     private Figure screen;
     public final int width;
@@ -37,13 +37,13 @@ public class World2D {
         this.height = height;
     }
 
-    public void add(Object2D object) {
+    public void add(Atom2D object) {
         objects.add(object);
-        world.add(object.object);
+        world.add(object.atom);
     }
 
     public void show(Graphics graphics) {
-        for (Object2D object : objects) {
+        for (Atom2D object : objects) {
             object.show(graphics, screen.pos(), height, width);
         }
     }

@@ -7,7 +7,7 @@ import com.abstractEngine.math.Point;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class Line2D implements GraphicsModel {
+public class Line2D implements View {
     public final Line line;
     private Color outlineColor;
 
@@ -29,9 +29,9 @@ public class Line2D implements GraphicsModel {
     @Override
     public void show(Graphics graphics, Point posScreen, int height, int width) {
         ArrayList<Point> points = new ArrayList<>(2);
-        Point P_1 = Point.add(posScreen, new Point(0, height));
-        Point P_2 = Point.add(posScreen, new Point(width, height));
-        Point P_3 = Point.add(posScreen, new Point(width, 0));
+        Point P_1 = posScreen.add(new Point(0, height));
+        Point P_2 = posScreen.add(new Point(width, height));
+        Point P_3 = posScreen.add(new Point(width, 0));
         Section S_1 = new Section(posScreen, P_1);
         Section S_2 = new Section(P_1, P_2);
         Section S_3 = new Section(P_2, P_3);

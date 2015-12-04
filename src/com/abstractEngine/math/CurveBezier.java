@@ -26,7 +26,7 @@ public class CurveBezier {
         Point prev = pos;
         points.add(prev);
         for (Vector vector : vectors) {
-            prev = Point.add(prev, vector.pos);
+            prev = prev.add(vector);
             points.add(prev);
         }
         List<Integer> cnk = new ArrayList<>();
@@ -57,7 +57,7 @@ public class CurveBezier {
         List<Vector> vectors = new ArrayList<>();
         Point prev1 = points.get(0);
         for (int i = 1; i < points.size(); ++i) {
-            vectors.add(new Vector(Point.rem(points.get(i), prev1)));
+            vectors.add(new Vector(points.get(i).rem(prev1)));
             prev1 = points.get(i);
         }
         return new Polyline(points.get(0), vectors);

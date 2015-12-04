@@ -5,7 +5,7 @@ import com.abstractEngine.math.Section;
 
 import java.awt.*;
 
-public class Section2D implements GraphicsModel {
+public class Section2D implements View {
     public final Section section;
     private Color outlineColor;
 

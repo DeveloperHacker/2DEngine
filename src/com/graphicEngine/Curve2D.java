@@ -4,12 +4,12 @@ import com.abstractEngine.math.CurveBezier;
 
 import java.awt.*;
 
-public class CurveBezier2D implements GraphicsModel {
+public class Curve2D implements View {
 
     private final CurveBezier curve;
     private Color outlineColor;
 
-    public CurveBezier2D(CurveBezier curve, Color outlineColor) {
+    public Curve2D(CurveBezier curve, Color outlineColor) {
         this.curve = curve;
         this.outlineColor = outlineColor;
     }

@@ -1,81 +1,63 @@
 package com.abstractEngine.math;
 
-public class Vector {
-    public static final double EPSILON = 0.02;
-    public final Point pos;
+public class Vector extends Point{
 
     public Vector() {
-        pos = new Point();
+        super();
     }
 
     public Vector(Vector vector) {
-        pos = vector.pos;
+        super(vector);
     }
 
     public Vector(Point point) {
-        pos = point;
+        super(point);
     }
 
     public Vector(double x, double y) {
-        pos = new Point(x, y);
+        super(x, y);
     }
 
     public double abs() {
-        return Math.sqrt(pos.x * pos.x + pos.y * pos.y);
+        return Math.sqrt(x * x + y * y);
+    }
+
+    public Vector add(Vector vector) {
+        return new Vector(add((Point)vector));
+    }
+
+    public Vector rem(Vector vector) {
+        return new Vector(rem((Point)vector));
     }
 
     public Vector mul(double num) {
-        return new Vector(pos.x * num, pos.y * num);
+        return new Vector(x * num, y * num);
     }
 
     public Vector minus() {
-        return Vector.rem(new Vector(), this);
+        return new Vector(-x, -y);
     }
 
-    public static Vector add(Vector _1, Vector _2) {
-        return new Vector(_1.pos.x + _2.pos.x, _1.pos.y + _2.pos.y);
+    public double scalarMul(Vector vector) {
+        return x * vector.x + y * vector.y;
     }
 
-    public double x(){
-        return pos.x;
+    public double cos(Vector vector) {
+        return scalarMul(vector) / (abs() * vector.abs());
     }
 
-    public double y(){
-        return pos.y;
+    public double vectorMul(Vector vector) {
+        return x * vector.y - vector.x * y;
     }
 
-    public static Vector rem(Vector _1, Vector _2) {
-        return new Vector(_1.pos.x - _2.pos.x, _1.pos.y - _2.pos.y);
-    }
-
-    public static double scalarMul(Vector _1, Vector _2) {
-        return _1.pos.x * _2.pos.x + _1.pos.y * _2.pos.y;
-    }
-
-    public static double cos(Vector _1, Vector _2) {
-        return scalarMul(_1, _2) / (_1.abs() * _2.abs());
-    }
-
-    public static double vectorMul(Vector _1, Vector _2) {
-        return _1.pos.x * _2.pos.y - _2.pos.x * _1.pos.y;
-    }
-
-    @Override
-    public boolean equals(java.lang.Object obj) {
-        if (this == obj) return true;
-        if (obj instanceof Vector) {
-            Vector vector = (Vector) obj;
-            return vector.pos.equals(pos);
-        } else return false;
-    }
-
-    @Override
-    public int hashCode() {
-        return pos.hashCode();
+    public Vector rotate(double theta) {
+        double cos = Math.cos(theta);
+        double sin = Math.sin(theta);
+        return new Vector(x * cos - y * sin, x * sin + y * cos);
     }
 
     @Override
     public String toString() {
-        return "[" + pos.x + "X + " + pos.y + "Y]";
+        return "[" + x + "X + " + y + "Y]";
     }
 }

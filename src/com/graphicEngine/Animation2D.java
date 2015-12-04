@@ -8,7 +8,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Animation2D implements GraphicsModel {
+public class Animation2D implements View {
 
     private List<Frame2D> frames;
     private int currentFrame = 0;
@@ -58,14 +58,14 @@ public class Animation2D implements GraphicsModel {
         List<Vector> vectors = new ArrayList<>(vectors1.size());
         Vector prev1 = new Vector(_1.pos());
         Vector prev2 = new Vector(_2.pos());
-        Vector prev = Vector.add(prev1.mul(1 - t), prev2.mul(t));
+        Vector prev = (prev1.mul(1 - t)).add(prev2.mul(t));
         for (int i = 0; i < vectors1.size(); i++) {
-            prev1 = Vector.add(prev1, vectors1.get(i));
-            prev2 = Vector.add(prev2, vectors2.get(i));
-            vectors.add(Vector.rem(Vector.add(prev1.mul(1 - t), prev2.mul(t)), prev));
-            prev = Vector.add(prev1.mul(1 - t), prev2.mul(t));
+            prev1 = prev1.add(vectors1.get(i));
+            prev2 = prev2.add(vectors2.get(i));
+            vectors.add(((prev1.mul(1 - t)).add(prev2.mul(t))).rem(prev));
+            prev = (prev1.mul(1 - t)).add(prev2.mul(t));
         }
-        return new Figure(prev.pos, vectors);
+        return new Figure(prev, vectors);
     }
 
     @Override

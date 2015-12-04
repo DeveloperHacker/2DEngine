@@ -1,6 +1,7 @@
 package com.abstractEngine.math;
 
 public class Point {
+    public static final double EPSILON = 0.02;
     public final double x;
     public final double y;
 
@@ -19,12 +20,12 @@ public class Point {
         this.y = y;
     }
 
-    public static Point add(Point _1, Point _2) {
-        return new Point(_1.x + _2.x, _1.y + _2.y);
+    public Point add(Point point) {
+        return new Point(x + point.x, y + point.y);
     }
 
-    public static Point rem(Point _1, Point _2) {
-        return new Point(_1.x - _2.x, _1.y - _2.y);
+    public Point rem(Point point) {
+        return new Point(x - point.x, y - point.y);
     }
 
     @Override

@@ -1,10 +1,8 @@
 package worlds;
 
 import com.abstractEngine.World;
-import com.abstractEngine.math.Point;
 import com.abstractEngine.math.Vector;
-import com.abstractEngine.object.Object;
-import com.graphicEngine.World2D;
+import com.abstractEngine.object.Atom;
 
 public class TestWorld extends World {
 
@@ -21,38 +19,38 @@ public class TestWorld extends World {
     public void update() {
         final Vector G = new Vector(0, 0.2);
         final double maxSpeed = 20;
-        final double damping = 0.9;
-        for (Object object : objects) {
-            if (object.movable()) {
-                object.setSpeed(Vector.add(object.speed(), G));
-                if (object.pos().y <= 0) {
-//                    if (object.speed().y() < 0)
-//                        object.setSpeed(new Vector(object.speed().x(), -object.speed().y())/*.mul(damping)*/);
+        final double damping = 0.98;
+        for (Atom atom : atoms) {
+            if (atom.movable()) {
+                atom.set(atom.speed().add(G));
+                if (atom.pos().y <= 0) {
+//                    if (atom.speed().y() < 0)
+//                        atom.setSpeed(new Vector(atom.speed().x(), -atom.speed().y())/*.mul(damping)*/);
                 }
-                if (object.pos().y >= height - object.mask().height()) {
-                    if (object.speed().y() > 0)
-                        object.setSpeed(new Vector(object.speed().x(), -object.speed().y())/*.mul(damping)*/);
+                if (atom.pos().y >= height - atom.mask().height()) {
+                    if (atom.speed().y > 0)
+                        atom.set(new Vector(atom.speed().x, -atom.speed().y).mul(damping));
                 }
-                if (object.pos().x <= 0) {
-                    if (object.speed().x() < 0)
-                        object.setSpeed(new Vector(-object.speed().x(), object.speed().y())/*.mul(damping)*/);
+                if (atom.pos().x <= 0) {
+                    if (atom.speed().x < 0)
+                        atom.set(new Vector(-atom.speed().x, atom.speed().y)/*.mul(damping)*/);
                 }
-                if (object.pos().x >= width - object.mask().width()) {
-                    if (object.speed().x() > 0)
-                        object.setSpeed(new Vector(-object.speed().x(), object.speed().y())/*.mul(damping)*/);
+                if (atom.pos().x >= width - atom.mask().width()) {
+                    if (atom.speed().x > 0)
+                        atom.set(new Vector(-atom.speed().x, atom.speed().y)/*.mul(damping)*/);
                 }
-                if (object.speed().abs() > maxSpeed)
-                    object.setSpeed(object.speed().mul(maxSpeed / object.speed().abs()));
+                if (atom.speed().abs() > maxSpeed)
+                    atom.set(atom.speed().mul(maxSpeed / atom.speed().abs()));
             }
         }
-        for (int i = 0; i < objects.size() - 1; i++) {
-            for (int j = i + 1; j < objects.size(); j++) {
-                clash(objects.get(i), objects.get(j));
+        for (int i = 0; i < atoms.size() - 1; i++) {
+            for (int j = i + 1; j < atoms.size(); j++) {
+                atoms.get(i).clash(atoms.get(j), 1, 1);
             }
         }
-        for (Object object : objects) {
-            if (object.movable()) {
-                object.setPos(Point.add(object.pos(), object.speed().pos));
+        for (Atom atom : atoms) {
+            if (atom.movable()) {
+                atom.set(atom.pos().add(atom.speed()));
             }
         }
     }
@@ -72,39 +70,40 @@ class TestWorldWeightlessness extends World {
 
     @Override
     public void update() {
-        final double maxSpeed = 100;
-        final double xDamping = 0.9;
-        final double yDamping = 0.98;
-        for (Object object : objects) {
-            if (object.movable()) {
-                if (object.pos().y <= 0) {
-                    if (object.speed().y() < 0)
-                        object.setSpeed(new Vector(object.speed().x() * xDamping, -object.speed().y() * yDamping));
+        final Vector G = new Vector(0, 0.2);
+        final double maxSpeed = 20;
+        final double damping = 0.9;
+        for (Atom atom : atoms) {
+            if (atom.movable()) {
+//                atom.setSpeed(Vector.add(atom.speed(), G));
+                if (atom.pos().y <= 0) {
+//                    if (atom.speed().y() < 0)
+//                        atom.setSpeed(new Vector(atom.speed().x(), -atom.speed().y())/*.mul(damping)*/);
                 }
-                if (object.pos().y >= height - object.mask().height()) {
-                    if (object.speed().y() > 0)
-                        object.setSpeed(new Vector(object.speed().x() * xDamping, -object.speed().y() * yDamping));
+                if (atom.pos().y >= height - atom.mask().height()) {
+                    if (atom.speed().y > 0)
+                        atom.set(new Vector(atom.speed().x, -atom.speed().y)/*.mul(damping)*/);
                 }
-                if (object.pos().x <= 0) {
-                    if (object.speed().x() < 0)
-                        object.setSpeed(new Vector(-object.speed().x() * xDamping, object.speed().y() * yDamping));
+                if (atom.pos().x <= 0) {
+                    if (atom.speed().x < 0)
+                        atom.set(new Vector(-atom.speed().x, atom.speed().y)/*.mul(damping)*/);
                 }
-                if (object.pos().x >= height - object.mask().width()) {
-                    if (object.speed().x() > 0)
-                        object.setSpeed(new Vector(-object.speed().x() * xDamping, object.speed().y() * yDamping));
+                if (atom.pos().x >= width - atom.mask().width()) {
+                    if (atom.speed().x > 0)
+                        atom.set(new Vector(-atom.speed().x, atom.speed().y)/*.mul(damping)*/);
                 }
-                if (object.speed().abs() > maxSpeed)
-                    object.setSpeed(object.speed().mul(maxSpeed / object.speed().abs()));
+                if (atom.speed().abs() > maxSpeed)
+                    atom.set(atom.speed().mul(maxSpeed / atom.speed().abs()));
             }
         }
-        for (int i = 0; i < objects.size() - 1; i++) {
-            for (int j = i + 1; j < objects.size(); j++) {
-                clash(objects.get(i), objects.get(j));
+        for (int i = 0; i < atoms.size() - 1; i++) {
+            for (int j = i + 1; j < atoms.size(); j++) {
+                atoms.get(i).clash(atoms.get(j), 1, 1);
             }
         }
-        for (Object object : objects) {
-            if (object.movable()) {
-                object.setPos(Point.add(object.pos(), object.speed().pos));
+        for (Atom atom : atoms) {
+            if (atom.movable()) {
+                atom.set(atom.pos().add(atom.speed()));
             }
         }
     }

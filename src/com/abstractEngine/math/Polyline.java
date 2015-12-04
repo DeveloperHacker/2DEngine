@@ -20,7 +20,7 @@ public class Polyline {
 
     public static boolean intersection(Polyline _1, Figure _2) {
         for (Vector vector : _1.vectors) {
-            if (_2.isInside(vector.pos)) return true;
+            if (_2.isInside(vector)) return true;
         }
         return _2.isInside(_1.pos);
     }
@@ -28,8 +28,8 @@ public class Polyline {
     public static boolean intersection(Polyline _1, Polyline _2) {
         Point prev = _1.pos;
         for (Vector vector : _1.vectors) {
-            if (intersection(_2, new Section(prev, vector.pos))) return true;
-            prev = vector.pos;
+            if (intersection(_2, new Section(prev, vector))) return true;
+            prev = vector;
         }
         return false;
     }
@@ -37,8 +37,8 @@ public class Polyline {
     public static boolean intersection(Polyline _1, Section _2) {
         Point prev = _1.pos;
         for (Vector vector : _1.vectors) {
-            if (Section.intersection(_2, new Section(prev, vector.pos))) return true;
-            prev = vector.pos;
+            if (Section.intersection(_2, new Section(prev, vector))) return true;
+            prev = vector;
         }
         return false;
     }
@@ -46,13 +46,13 @@ public class Polyline {
     public static boolean intersection(Polyline _1, Line _2) {
         Point prev = _1.pos;
         for (Vector vector : _1.vectors) {
-            if (Line.intersection(_2, new Section(prev, vector.pos))) return true;
-            prev = vector.pos;
+            if (Line.intersection(_2, new Section(prev, vector))) return true;
+            prev = vector;
         }
         return false;
     }
 
-    public void setPos(Point pos) {
+    public void set(Point pos) {
         this.pos = pos;
     }
 
