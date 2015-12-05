@@ -9,11 +9,11 @@ public class RightFigure extends Figure {
         super(figure.pos(), figure.vectors());
     }
 
-    public RightFigure(Point pos, Integer quantityVertex, double radius, double alpha) {
+    public RightFigure(Vector pos, Integer quantityVertex, double radius, double alpha) {
         super(pos, generateOutline(quantityVertex, radius, alpha));
     }
 
-    public RightFigure(Point pos, Integer quantityVertex, double radius) {
+    public RightFigure(Vector pos, Integer quantityVertex, double radius) {
         super(pos, generateOutline(quantityVertex, radius, 0));
     }
 

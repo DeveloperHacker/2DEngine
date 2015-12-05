@@ -13,7 +13,7 @@ public class Rectangle extends Figure {
         return vectors;
     }
 
-    public Rectangle(Point pos, double width, double height) {
-        super(pos, initVectors(height, width));
+    public Rectangle(Vector pos, double width, double height) {
+        super(pos, initVectors(width, height));
     }
 }

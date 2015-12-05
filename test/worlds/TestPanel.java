@@ -2,7 +2,7 @@ package worlds;
 
 import com.abstractEngine.World;
 import com.abstractEngine.math.*;
-import com.abstractEngine.math.Point;
+import com.abstractEngine.math.Vector;
 import com.abstractEngine.math.Vector;
 import com.abstractEngine.object.Atom;
 import com.graphicEngine.*;
@@ -68,7 +68,7 @@ class _1_TestPanel extends TestPanel {
     @Override
     protected void initTest() {
         double radius = 25;
-        Ellipse circle = new Ellipse(new Point(radius, radius), radius * 2, radius * 2);
+        Ellipse circle = new Ellipse(new Vector(radius, radius), radius * 2, radius * 2);
         Figure mask = circle.toFigure(10);
         Atom atom;
         Atom2D atom2D;
@@ -76,7 +76,7 @@ class _1_TestPanel extends TestPanel {
         int quantityBalls = 10;
         for (int i = 1; i < quantityBalls + 1; ++i) {
             speed = new Vector(Math.random() * 2 - 1, Math.random() * 2 - 1);
-            atom = new Atom(new Point(width() * i / (quantityBalls + 1) - mask.width() / 2, height() / 2), mask, 10, speed, true, "ball" + i);
+            atom = new Atom(new Vector(width() * i / (quantityBalls + 1) - mask.width() / 2, height() / 2), mask, 10, speed, true, "ball" + i);
             atom2D = new Atom2D(atom, new Frame2D(new Ellipse2D(circle, randColor())));
             add(atom2D);
         }

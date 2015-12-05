@@ -4,17 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CurveBezier {
-    private Point pos;
+    private Vector pos;
     private final List<Vector> vectors;
     private double step;
 
     public  CurveBezier(CurveBezier curve) {
         this.pos = curve.pos();
         vectors = new ArrayList<>(curve.vectors);
-        this.step = step;
     }
 
-    public CurveBezier(List<Vector> vectors, Point pos, List<Vector> vectors1, double step) throws IllegalArgumentException {
+    public CurveBezier(List<Vector> vectors, Vector pos, List<Vector> vectors1, double step) throws IllegalArgumentException {
         if (vectors.size() < 2) throw new IllegalArgumentException();
         this.vectors = new ArrayList<>(vectors);
         this.pos = pos;
@@ -22,18 +21,18 @@ public class CurveBezier {
     }
 
     public Polyline toPolyline() {
-        List<Point> points = new ArrayList<>();
-        Point prev = pos;
-        points.add(prev);
+        List<Vector> Vectors = new ArrayList<>();
+        Vector prev = pos;
+        Vectors.add(prev);
         for (Vector vector : vectors) {
             prev = prev.add(vector);
-            points.add(prev);
+            Vectors.add(prev);
         }
         List<Integer> cnk = new ArrayList<>();
         List<Integer> prevcnk;
         cnk.add(1);
         cnk.add(1);
-        for (int i = 3; i < points.size(); ++i) {
+        for (int i = 3; i < Vectors.size(); ++i) {
             prevcnk = cnk;
             cnk.clear();
             cnk.add(1);
@@ -42,36 +41,36 @@ public class CurveBezier {
             }
             cnk.add(1);
         }
-        List<Point> newPoints = new ArrayList<>();
+        List<Vector> newVectors = new ArrayList<>();
         double way = 0;
         while (way <= 1) {
             double x = 0;
             double y = 0;
-            for (int i = 0; i < points.size(); ++i) {
-                x += points.get(i).x * Math.pow(way, i) * Math.pow(1.0 - way, points.size() - i - 1);
-                y += points.get(i).y * Math.pow(way, i) * Math.pow(1.0 - way, points.size() - i - 1);
+            for (int i = 0; i < Vectors.size(); ++i) {
+                x += Vectors.get(i).x * Math.pow(way, i) * Math.pow(1.0 - way, Vectors.size() - i - 1);
+                y += Vectors.get(i).y * Math.pow(way, i) * Math.pow(1.0 - way, Vectors.size() - i - 1);
             }
-            newPoints.add(new Point(x, y));
+            newVectors.add(new Vector(x, y));
             way += step;
         }
         List<Vector> vectors = new ArrayList<>();
-        Point prev1 = points.get(0);
-        for (int i = 1; i < points.size(); ++i) {
-            vectors.add(new Vector(points.get(i).rem(prev1)));
-            prev1 = points.get(i);
+        Vector prev1 = Vectors.get(0);
+        for (int i = 1; i < Vectors.size(); ++i) {
+            vectors.add(new Vector(Vectors.get(i).rem(prev1)));
+            prev1 = Vectors.get(i);
         }
-        return new Polyline(points.get(0), vectors);
+        return new Polyline(Vectors.get(0), vectors);
     }
 
     public List<Vector> vectors() {
         return new ArrayList<>(vectors);
     }
 
-    public Point pos() {
+    public Vector pos() {
         return pos;
     }
 
-    public void set(Point pos) {
+    public void set(Vector pos) {
         this.pos = pos;
     }
 

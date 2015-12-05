@@ -1,23 +1,23 @@
 package com.abstractEngine.math;
 
 public class Section {
-    public final Point _1;
-    public final Point _2;
+    public final Vector _1;
+    public final Vector _2;
 
     public Section(Section section) {
         _1 = section._1;
         _2 = section._2;
     }
 
-    public Section(Point _1, Point _2) throws IllegalArgumentException {
+    public Section(Vector _1, Vector _2) throws IllegalArgumentException {
         this._1 = _1;
         this._2 = _2;
         if (_1 == _2) throw new IllegalArgumentException("Error: Section:" + this.toString());
     }
 
     public Section(double x_1, double y_1, double x_2, double y_2) throws IllegalArgumentException {
-        _1 = new Point(x_1, y_1);
-        _2 = new Point(x_2, y_2);
+        _1 = new Vector(x_1, y_1);
+        _2 = new Vector(x_2, y_2);
         if (_1 == _2) throw new IllegalArgumentException("Error: Section:" + this.toString());
     }
 
@@ -25,10 +25,10 @@ public class Section {
         return new Line(this);
     }
 
-    public boolean isInside(Point point) {
-        if (new Line(this).solve(point) != 0) return false;
+    public boolean isInside(Vector Vector) {
+        if (new Line(this).solve(Vector) != 0) return false;
         if (_1.y != _2.y) {
-            Point up, down;
+            Vector up, down;
             if (_1.y > _2.y) {
                 up = _1;
                 down = _2;
@@ -36,11 +36,11 @@ public class Section {
                 up = _2;
                 down = _1;
             }
-            if (point.y > up.y || point.y < down.y) return false;
-            if (point.y <= up.y && point.y >= down.y) return true;
+            if (Vector.y > up.y || Vector.y < down.y) return false;
+            if (Vector.y <= up.y && Vector.y >= down.y) return true;
         }
         if (_1.x != _2.x) {
-            Point right, left;
+            Vector right, left;
             if (_1.x > _2.x) {
                 right = _1;
                 left = _2;
@@ -48,8 +48,8 @@ public class Section {
                 right = _2;
                 left = _1;
             }
-            if (point.x > right.x || point.x < left.x) return false;
-            if (point.x <= right.x && point.x >= left.x) return true;
+            if (Vector.x > right.x || Vector.x < left.x) return false;
+            if (Vector.x <= right.x && Vector.x >= left.x) return true;
         }
         return true;
     }

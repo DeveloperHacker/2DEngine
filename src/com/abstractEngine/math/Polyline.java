@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Polyline {
 
-    private Point pos;
+    private Vector pos;
     private List<Vector> vectors;
 
     public Polyline(Polyline polyline) {
@@ -13,7 +13,7 @@ public class Polyline {
         vectors = new ArrayList<>(polyline.vectors);
     }
 
-    public Polyline(Point pos, List<Vector> vectors) {
+    public Polyline(Vector pos, List<Vector> vectors) {
         this.vectors = new ArrayList<>(vectors);
         this.pos = pos;
     }
@@ -26,7 +26,7 @@ public class Polyline {
     }
 
     public static boolean intersection(Polyline _1, Polyline _2) {
-        Point prev = _1.pos;
+        Vector prev = _1.pos;
         for (Vector vector : _1.vectors) {
             if (intersection(_2, new Section(prev, vector))) return true;
             prev = vector;
@@ -35,7 +35,7 @@ public class Polyline {
     }
 
     public static boolean intersection(Polyline _1, Section _2) {
-        Point prev = _1.pos;
+        Vector prev = _1.pos;
         for (Vector vector : _1.vectors) {
             if (Section.intersection(_2, new Section(prev, vector))) return true;
             prev = vector;
@@ -44,7 +44,7 @@ public class Polyline {
     }
 
     public static boolean intersection(Polyline _1, Line _2) {
-        Point prev = _1.pos;
+        Vector prev = _1.pos;
         for (Vector vector : _1.vectors) {
             if (Line.intersection(_2, new Section(prev, vector))) return true;
             prev = vector;
@@ -52,11 +52,11 @@ public class Polyline {
         return false;
     }
 
-    public void set(Point pos) {
+    public void set(Vector pos) {
         this.pos = pos;
     }
 
-    public Point pos() {
+    public Vector pos() {
         return pos;
     }
 

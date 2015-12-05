@@ -1,7 +1,6 @@
 package com.graphicEngine;
 
 import com.abstractEngine.math.Figure;
-import com.abstractEngine.math.Point;
 import com.abstractEngine.math.Vector;
 import com.abstractEngine.object.Atom;
 
@@ -22,12 +21,12 @@ public class Atom2D implements View {
         this.background = background;
     }
 
-    public Atom2D(Point pos, Figure mask, double mass, Vector speed, boolean movable, String name, View background) {
+    public Atom2D(Vector pos, Figure mask, double mass, Vector speed, boolean movable, String name, View background) {
         atom = new Atom(pos, mask, mass, speed, movable, name);
         this.background = background;
     }
 
-    public Atom2D(Point pos, Figure mask, double mass, boolean movable, String name, View background) {
+    public Atom2D(Vector pos, Figure mask, double mass, boolean movable, String name, View background) {
         atom = new Atom(pos, mask, mass, movable, name);
         this.background = background;
     }
@@ -45,10 +44,10 @@ public class Atom2D implements View {
     }
 
     @Override
-    public void show(Graphics graphics, Point posScreen, int height, int width) {
+    public void show(Graphics graphics, Vector posScreen, int height, int width) {
         background.show(graphics, atom.pos().rem(posScreen), height, width);
         new Figure2D(atom.mask(), Color.WHITE).show(graphics, atom.pos().rem(posScreen), height, width);
-        graphics.setColor(Color.BLUE);
-        graphics.drawLine(0, 0, (int)(atom.pos().rem(posScreen).x), (int)(atom.pos().rem(posScreen).y));
+//        graphics.setColor(Color.BLUE);
+//        graphics.drawLine(0, 0, (int)(atom.pos().rem(posScreen).x), (int)(atom.pos().rem(posScreen).y));
     }
 }

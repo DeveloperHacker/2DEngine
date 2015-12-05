@@ -1,11 +1,10 @@
 package com.abstractEngine.object;
 
 import com.abstractEngine.math.Figure;
-import com.abstractEngine.math.Point;
 import com.abstractEngine.math.Vector;
 
 public class Atom {
-    private Point pos;
+    private Vector pos;
     private Figure mask;
     private double mass;
     private Vector speed;
@@ -30,7 +29,7 @@ public class Atom {
         this.movable = atom.movable;
     }
 
-    public Atom(Point pos, Figure mask, double mass, Vector speed, boolean movable, String name) {
+    public Atom(Vector pos, Figure mask, double mass, Vector speed, boolean movable, String name) {
         this.pos = pos;
         this.mask = mask;
         this.mass = mass;
@@ -39,7 +38,7 @@ public class Atom {
         this.movable = movable;
     }
 
-    public Atom(Point pos, Figure mask, double mass, boolean movable, String name) {
+    public Atom(Vector pos, Figure mask, double mass, boolean movable, String name) {
         this.pos = pos;
         this.mask = mask;
         this.mass = mass;
@@ -52,7 +51,7 @@ public class Atom {
         this.mask = mask;
     }
 
-    public void set(Point pos) {
+    public void moveTo(Vector pos) {
         this.pos = pos;
     }
 
@@ -68,7 +67,7 @@ public class Atom {
         return mask;
     }
 
-    public Point pos() {
+    public Vector pos() {
         return pos;
     }
 

@@ -1,7 +1,6 @@
 package com.graphicEngine;
 
 import com.abstractEngine.math.Figure;
-import com.abstractEngine.math.Point;
 import com.abstractEngine.math.Vector;
 
 import java.awt.*;
@@ -69,7 +68,7 @@ public class Animation2D implements View {
     }
 
     @Override
-    public void show(Graphics graphics, Point posScreen, int height, int width) {
+    public void show(Graphics graphics, Vector posScreen, int height, int width) {
         if (frames.size() != 0) {
                 frames.get(currentFrame).show(graphics, posScreen, height, width);
                 if (time == delay) {

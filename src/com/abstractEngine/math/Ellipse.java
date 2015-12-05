@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Ellipse {
-    private Point pos;
+    private Vector pos;
     private double height;
     private double width;
 
@@ -14,7 +14,7 @@ public class Ellipse {
         this.width = ellipse.width;
     }
 
-    public Ellipse(Point pos, double height, double width) {
+    public Ellipse(Vector pos, double height, double width) {
         this.pos = pos;
         this.height = height;
         this.width = width;
@@ -26,7 +26,7 @@ public class Ellipse {
         this.width = rectangle.width();
     }
 
-    public Point pos() {
+    public Vector pos() {
         return pos;
     }
 
@@ -39,7 +39,7 @@ public class Ellipse {
     }
 
     public Figure toFigure(Integer quantityVertex) {
-        return new Figure(pos().add(new Point(0, -height / 2)), generateOutline(quantityVertex));
+        return new Figure(pos().add(new Vector(0, -height / 2)), generateOutline(quantityVertex));
     }
 
     private List<Vector> generateOutline(Integer quantityVertex) {

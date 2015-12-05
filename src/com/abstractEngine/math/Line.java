@@ -24,7 +24,7 @@ public class Line {
         if ((A == 0) && (B == 0)) throw new IllegalArgumentException("Error: Line:" + this.toString());
     }
 
-    public double solve(Point p) {
+    public double solve(Vector p) {
         return A * p.x + B * p.y + C;
     }
 

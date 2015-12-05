@@ -1,9 +1,9 @@
 package com.graphicEngine;
 
-import com.abstractEngine.math.Point;
+import com.abstractEngine.math.Vector;
 
 import java.awt.*;
-import java.util.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Frame2D implements View {
@@ -32,7 +32,7 @@ public class Frame2D implements View {
     }
 
     @Override
-    public void show(Graphics graphics, Point posScreen, int height, int width) {
+    public void show(Graphics graphics, Vector posScreen, int height, int width) {
         for (View model : background) model.show(graphics, posScreen, height, width);
     }
 }

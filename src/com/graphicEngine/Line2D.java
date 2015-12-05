@@ -2,7 +2,7 @@ package com.graphicEngine;
 
 import com.abstractEngine.math.Line;
 import com.abstractEngine.math.Section;
-import com.abstractEngine.math.Point;
+import com.abstractEngine.math.Vector;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -27,22 +27,22 @@ public class Line2D implements View {
     }
 
     @Override
-    public void show(Graphics graphics, Point posScreen, int height, int width) {
-        ArrayList<Point> points = new ArrayList<>(2);
-        Point P_1 = posScreen.add(new Point(0, height));
-        Point P_2 = posScreen.add(new Point(width, height));
-        Point P_3 = posScreen.add(new Point(width, 0));
+    public void show(Graphics graphics, Vector posScreen, int height, int width) {
+        ArrayList<Vector> Vectors = new ArrayList<>(2);
+        Vector P_1 = posScreen.add(new Vector(0, height));
+        Vector P_2 = posScreen.add(new Vector(width, height));
+        Vector P_3 = posScreen.add(new Vector(width, 0));
         Section S_1 = new Section(posScreen, P_1);
         Section S_2 = new Section(P_1, P_2);
         Section S_3 = new Section(P_2, P_3);
         Section S_4 = new Section(P_3, posScreen);
-        if (Line.intersection(line, S_1)) points.add(new Point(posScreen.x, line.y(posScreen.x)));
-        if (Line.intersection(line, S_2)) points.add(new Point(line.x(posScreen.y + height), posScreen.y + height));
-        if (Line.intersection(line, S_3)) points.add(new Point(posScreen.x + width, line.y(posScreen.x + width)));
-        if (Line.intersection(line, S_4)) points.add(new Point(line.x(posScreen.y), posScreen.y));
-        if (points.size() == 2)
-            new Section2D(points.get(0), points.get(1), outlineColor).show(graphics, posScreen, height, width);
-        if (points.size() > 2)
-            new Section2D(points.get(0), points.get(2), outlineColor).show(graphics, posScreen, height, width);
+        if (Line.intersection(line, S_1)) Vectors.add(new Vector(posScreen.x, line.y(posScreen.x)));
+        if (Line.intersection(line, S_2)) Vectors.add(new Vector(line.x(posScreen.y + height), posScreen.y + height));
+        if (Line.intersection(line, S_3)) Vectors.add(new Vector(posScreen.x + width, line.y(posScreen.x + width)));
+        if (Line.intersection(line, S_4)) Vectors.add(new Vector(line.x(posScreen.y), posScreen.y));
+        if (Vectors.size() == 2)
+            new Section2D(Vectors.get(0), Vectors.get(1), outlineColor).show(graphics, posScreen, height, width);
+        if (Vectors.size() > 2)
+            new Section2D(Vectors.get(0), Vectors.get(2), outlineColor).show(graphics, posScreen, height, width);
     }
 }

@@ -1,21 +1,23 @@
 package com.abstractEngine.math;
 
-public class Vector extends Point{
+public class Vector {
+    public final static double EPSILON = 0.1;
+    public final double x;
+    public final double y;
 
     public Vector() {
-        super();
+        x = 0;
+        y = 0;
     }
 
     public Vector(Vector vector) {
-        super(vector);
-    }
-
-    public Vector(Point point) {
-        super(point);
+        x = vector.x;
+        y = vector.y;
     }
 
     public Vector(double x, double y) {
-        super(x, y);
+        this.x = x;
+        this.y = y;
     }
 
     public double abs() {
@@ -23,11 +25,11 @@ public class Vector extends Point{
     }
 
     public Vector add(Vector vector) {
-        return new Vector(add((Point)vector));
+        return new Vector(x + vector.x, y + vector.y);
     }
 
     public Vector rem(Vector vector) {
-        return new Vector(rem((Point)vector));
+        return new Vector(x - vector.x, y - vector.y);
     }
 
     public Vector mul(double num) {
@@ -38,12 +40,12 @@ public class Vector extends Point{
         return new Vector(-x, -y);
     }
 
-    public double scalarMul(Vector vector) {
+    public double dot(Vector vector) {
         return x * vector.x + y * vector.y;
     }
 
     public double cos(Vector vector) {
-        return scalarMul(vector) / (abs() * vector.abs());
+        return dot(vector) / (abs() * vector.abs());
     }
 
     public double vectorMul(Vector vector) {
@@ -54,6 +56,26 @@ public class Vector extends Point{
         double cos = Math.cos(theta);
         double sin = Math.sin(theta);
         return new Vector(x * cos - y * sin, x * sin + y * cos);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj) return true;
+        if (obj instanceof Vector) {
+            Vector vector = (Vector) obj;
+            return (vector.x == x) && (vector.y == y);
+        } else return false;
+    }
+
+    @Override
+    public int hashCode() {
+        int result;
+        long temp;
+        temp = Double.doubleToLongBits(x);
+        result = (int) (temp ^ (temp >>> 32));
+        temp = Double.doubleToLongBits(y);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        return result;
     }
 
     @Override

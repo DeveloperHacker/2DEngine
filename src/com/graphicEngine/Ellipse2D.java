@@ -1,7 +1,7 @@
 package com.graphicEngine;
 
-import com.abstractEngine.math.*;
-import com.abstractEngine.math.Point;
+import com.abstractEngine.math.Ellipse;
+import com.abstractEngine.math.Vector;
 
 import java.awt.*;
 
@@ -24,10 +24,10 @@ public class Ellipse2D implements View {
     }
 
     @Override
-    public void show(Graphics graphics, Point posScreen, int height, int width) {
+    public void show(Graphics graphics, Vector posScreen, int height, int width) {
         graphics.setColor(outline);
         Vector size = new Vector(ellipse.width(), ellipse.height());
-        Point temp = posScreen.add(ellipse.pos()).rem(size.mul(1.0/2));
+        Vector temp = posScreen.add(ellipse.pos()).rem(size.mul(1.0/2));
         graphics.drawOval((int)(temp.x), (int)(temp.y), (int)(size.x), (int)(size.y));
     }
 }

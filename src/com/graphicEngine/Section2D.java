@@ -1,7 +1,7 @@
 package com.graphicEngine;
 
-import com.abstractEngine.math.Point;
 import com.abstractEngine.math.Section;
+import com.abstractEngine.math.Vector;
 
 import java.awt.*;
 
@@ -14,7 +14,7 @@ public class Section2D implements View {
         this.outlineColor = outlineColor;
     }
 
-    public Section2D(Point _1, Point _2, Color outlineColor) throws IllegalArgumentException {
+    public Section2D(Vector _1, Vector _2, Color outlineColor) throws IllegalArgumentException {
         this.section = new Section(_1, _2);
         this.outlineColor = outlineColor;
     }
@@ -25,7 +25,7 @@ public class Section2D implements View {
     }
 
     @Override
-    public void show(Graphics graphics, Point posScreen, int height, int width) {
+    public void show(Graphics graphics, Vector posScreen, int height, int width) {
         graphics.drawLine((int) (section._1.x - posScreen.x), (int) (section._1.y - posScreen.y),
                 (int) (section._2.x - posScreen.x), (int) (section._2.y - posScreen.y));
     }

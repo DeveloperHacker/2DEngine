@@ -15,7 +15,7 @@ public class Curve2D implements View {
     }
 
     @Override
-    public void show(Graphics graphics, com.abstractEngine.math.Point posScreen, int height, int width) {
+    public void show(Graphics graphics, com.abstractEngine.math.Vector posScreen, int height, int width) {
         new Polyline2D(curve.toPolyline(), outlineColor).show(graphics, posScreen, height, width);
     }
 }

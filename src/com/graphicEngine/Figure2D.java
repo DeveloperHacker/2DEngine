@@ -1,10 +1,9 @@
 package com.graphicEngine;
 
-import com.abstractEngine.math.*;
-import com.abstractEngine.math.Point;
+import com.abstractEngine.math.Figure;
+import com.abstractEngine.math.Vector;
 
 import java.awt.*;
-import java.util.List;
 
 public class Figure2D implements View {
 
@@ -25,9 +24,9 @@ public class Figure2D implements View {
     }
 
     @Override
-    public void show(Graphics graphics, Point posScreen, int height, int width) {
-        Point prev = figure.pos().add(posScreen);
-        Point current;
+    public void show(Graphics graphics, Vector posScreen, int height, int width) {
+        Vector prev = figure.pos().add(posScreen);
+        Vector current;
         graphics.setColor(outline);
         for (Vector vec : figure.vectors()) {
             current = prev.add(vec);

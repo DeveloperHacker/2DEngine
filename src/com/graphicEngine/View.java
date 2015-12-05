@@ -1,9 +1,9 @@
 package com.graphicEngine;
 
-import com.abstractEngine.math.Point;
+import com.abstractEngine.math.Vector;
 
 import java.awt.*;
 
 public interface View {
-    void show(Graphics graphics, Point posScreen, int height, int width);
+    void show(Graphics graphics, Vector posScreen, int height, int width);
 }

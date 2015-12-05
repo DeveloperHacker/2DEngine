@@ -2,7 +2,6 @@ package com.graphicEngine;
 
 import com.abstractEngine.World;
 import com.abstractEngine.math.Figure;
-import com.abstractEngine.math.Point;
 import com.abstractEngine.math.Vector;
 
 import java.awt.*;
@@ -26,7 +25,7 @@ public class World2D {
         vectors.add(new Vector(0, height));
         vectors.add(new Vector(-width, 0));
         vectors.add(new Vector(0, -height));
-        screen = new Figure(new Point(0, 0), vectors);
+        screen = new Figure(new Vector(0, 0), vectors);
         objects = new ArrayList<>();
     }
 

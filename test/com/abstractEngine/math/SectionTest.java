@@ -8,9 +8,8 @@ public class SectionTest {
         boolean catchIllegalArgumentException = false;
         try {
             Section section1 = new Section(2, 1, 8, 5);
-            Section section2 = new Section(new Point(2, 1), new Point(8, 5));
+            Section section2 = new Section(new Vector(2, 1), new Vector(8, 5));
             Section section3 = new Section(section1);
-            assert (section1.equals(section1));
             assert (section1.equals(section2));
             assert (section1.equals(section3));
             assert (Section.intersection(section1, section2));

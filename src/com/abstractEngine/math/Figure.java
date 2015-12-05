@@ -5,9 +5,9 @@ import java.util.List;
 
 public class Figure {
 
-    private Point pos;
+    private Vector pos;
     private List<Vector> vectors;
-    private Point center;
+    private Vector center;
 
     public Figure(Figure figure) {
         this.pos = figure.pos;
@@ -15,19 +15,18 @@ public class Figure {
         this.vectors = new ArrayList<>(figure.vectors);
     }
 
-    public Figure(Point pos, Figure figure) {
+    public Figure(Vector pos, Figure figure) {
         this.pos = pos;
         this.center = figure.center;
         this.vectors = new ArrayList<>(figure.vectors);
     }
 
-    public Figure(Point pos, List<Vector> vec) throws IllegalArgumentException {
+    public Figure(Vector pos, List<Vector> vec) throws IllegalArgumentException {
         this.pos = pos;
-        if (vec.size() < 3) throw new IllegalArgumentException();
-        double accuracy = 0.00001;
+        if (vec.size() < 3) throw new IllegalArgumentException("Figure is not region");
         Vector sum = vec.get(0);
         for (int i = 1; i < vec.size(); ++i) sum = sum.add(vec.get(i));
-        if (sum.abs() > accuracy) throw new IllegalArgumentException("Figure is not closed.");
+        if (sum.abs() > Vector.EPSILON) throw new IllegalArgumentException("Figure is not closed.");
         this.vectors = new ArrayList<>(vec);
         this.center = calcCenter();
     }
@@ -64,9 +63,10 @@ public class Figure {
         return Math.abs(max - min);
     }
 
-    public boolean isInside(Point point) {
-        Vector m = new Vector(point).rem(new Vector(pos));
-        double direct = 0, temp = 0;
+    public boolean isInside(Vector Vector) {
+        Vector m = new Vector(Vector).rem(new Vector(pos));
+        double direct = 0;
+        double temp;
         boolean init = false;
         for (Vector vector : vectors) {
             temp = vector.vectorMul(m);
@@ -82,8 +82,8 @@ public class Figure {
         return true;
     }
 
-    private Point calcCenter() {
-        Point prev = pos;
+    private Vector calcCenter() {
+        Vector prev = pos;
         double x = prev.x;
         double y = prev.y;
         for (int i = 0; i < vectors.size() - 1; ++i) {
@@ -91,7 +91,7 @@ public class Figure {
             x += prev.x;
             y += prev.y;
         }
-        return new Point(x / vectors.size(), y / vectors.size());
+        return new Vector(x / vectors.size(), y / vectors.size());
     }
 
     public static boolean intersection(Figure _1, Figure _2) {
@@ -117,7 +117,7 @@ public class Figure {
     }
 
     public static boolean intersection(Figure _1, Line _2) {
-        Point prev = _1.pos;
+        Vector prev = _1.pos;
         for (Vector vector : _1.vectors) {
             if (Section.intersection(new Section(prev, vector), _2)) return true;
             prev = vector;
@@ -125,11 +125,11 @@ public class Figure {
         return false;
     }
 
-    public void set(Point pos) {
+    public void set(Vector pos) {
         this.pos = pos;
     }
 
-    public Point pos() {
+    public Vector pos() {
         return pos;
     }
 
@@ -141,14 +141,20 @@ public class Figure {
         return new ArrayList<>(vectors);
     }
 
-    public Point set(List<Vector> vectors) {
+    public Vector set(List<Vector> vectors) {
         this.vectors = new ArrayList<>(vectors);
         center = calcCenter();
         return center;
     }
 
-    public Point center() {
+    public Vector center() {
         return center;
+    }
+
+    public void scale(Vector origin, double scale) {
+        Vector pos = new Vector(this.pos);
+        this.pos = pos.rem(new Vector(origin)).mul(scale).add(origin);
+
     }
 
     @Override
