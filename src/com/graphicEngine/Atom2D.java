@@ -44,10 +44,11 @@ public class Atom2D implements View {
     }
 
     @Override
-    public void show(Graphics graphics, Vector posScreen, int height, int width) {
-        background.show(graphics, atom.pos().rem(posScreen), height, width);
-        new Figure2D(atom.mask(), Color.WHITE).show(graphics, atom.pos().rem(posScreen), height, width);
+    public void show(Graphics graphics, Screen screen, Vector parentPos) {
+        Vector pos = atom.pos().rem(parentPos);
+        background.show(graphics, screen, pos);
+//        new Figure2D(atom.mask(), Color.WHITE).show(graphics, screen, pos);
 //        graphics.setColor(Color.BLUE);
-//        graphics.drawLine(0, 0, (int)(atom.pos().rem(posScreen).x), (int)(atom.pos().rem(posScreen).y));
+//        graphics.drawLine(0, 0, (int)(pos.x), (int)(pos.y));
     }
 }
