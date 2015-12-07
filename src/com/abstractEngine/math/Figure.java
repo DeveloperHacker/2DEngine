@@ -153,8 +153,17 @@ public class Figure {
 
     public void scale(Vector origin, double scale) {
         Vector pos = new Vector(this.pos);
-        this.pos = pos.rem(new Vector(origin)).mul(scale).add(origin);
+        this.pos = pos.rem(origin).mul(scale).add(origin);
+        for (int i = 0; i < vectors.size(); ++i) {
+            vectors.set(i, vectors.get(i).mul(scale));
+        }
+    }
 
+    public void rotate(Vector origin, double theta) {
+        pos = pos.rem(origin).rotate(theta).add(origin);
+        for (int i = 0; i < vectors.size(); ++i) {
+            vectors.set(i, vectors.get(i).rotate(theta));
+        }
     }
 
     @Override
@@ -170,6 +179,14 @@ public class Figure {
         int result;
         result = vectors.hashCode();
         return result;
+    }
+
+    public Figure instanceClone() {
+        return new Figure(pos, vectors);
+    }
+
+    public Figure clone() {
+        return new Figure(this);
     }
 
     @Override

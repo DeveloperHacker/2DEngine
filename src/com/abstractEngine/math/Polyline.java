@@ -63,4 +63,14 @@ public class Polyline {
     public List<Vector> vectors() {
         return new ArrayList<>(vectors);
     }
+
+    public Figure close() {
+        Vector lock = new Vector();
+        for (Vector vector : vectors) {
+            lock = lock.add(vector);
+        }
+        List<Vector> vectors = new ArrayList<>(this.vectors);
+        vectors.add(lock.minus());
+        return new Figure(pos, vectors);
+    }
 }

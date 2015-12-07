@@ -14,11 +14,6 @@ public class Animation2D implements View {
     private int delay = 0;
     private int time = 0;
 
-    public Animation2D(Frame2D frame) {
-        frames = new ArrayList<>();
-        frames.add(frame);
-    }
-
     public Animation2D(Animation2D animation) {
         frames = new ArrayList<>(animation.frames);
     }
@@ -67,10 +62,16 @@ public class Animation2D implements View {
         return new Figure(prev, vectors);
     }
 
+    public static Figure rotate(Figure figure, Vector origin, double t, double theta) {
+        Figure newFigure = new Figure(figure);
+        newFigure.rotate(origin, t * theta);
+        return newFigure;
+    }
+
     @Override
-    public void show(Graphics graphics, Vector posScreen, int height, int width) {
+    public void show(Graphics graphics, Screen screen, Vector parentPos) {
         if (frames.size() != 0) {
-                frames.get(currentFrame).show(graphics, posScreen, height, width);
+                frames.get(currentFrame).show(graphics, screen, parentPos);
                 if (time == delay) {
                     time = -1;
                     ++currentFrame;

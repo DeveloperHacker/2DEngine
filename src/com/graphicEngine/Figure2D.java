@@ -24,8 +24,8 @@ public class Figure2D implements View {
     }
 
     @Override
-    public void show(Graphics graphics, Vector posScreen, int height, int width) {
-        Vector prev = figure.pos().add(posScreen);
+    public void show(Graphics graphics, Screen screen, Vector parentPos) {
+        Vector prev = figure.pos().add(parentPos);
         Vector current;
         graphics.setColor(outline);
         for (Vector vec : figure.vectors()) {

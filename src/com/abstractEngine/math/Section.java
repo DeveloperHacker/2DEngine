@@ -21,6 +21,11 @@ public class Section {
         if (_1 == _2) throw new IllegalArgumentException("Error: Section:" + this.toString());
     }
 
+    public Rectangle toRectangle() {
+        Vector pos = new Vector(_1.x < _2.x ? _1.x : _2.x, _1.y < _2.y ? _1.y : _2.y);
+        return new Rectangle(pos, Math.abs(_1.x - _2.x), Math.abs(_1.y - _2.y));
+    }
+
     public Line toLine() {
         return new Line(this);
     }

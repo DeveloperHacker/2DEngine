@@ -32,7 +32,7 @@ public class Frame2D implements View {
     }
 
     @Override
-    public void show(Graphics graphics, Vector posScreen, int height, int width) {
-        for (View model : background) model.show(graphics, posScreen, height, width);
+    public void show(Graphics graphics, Screen screen, Vector parentPos) {
+        for (View model : background) model.show(graphics, screen, parentPos);
     }
 }

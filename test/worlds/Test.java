@@ -14,6 +14,8 @@ public class Test extends JFrame {
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new Test("Test 1", new _1_TestPanel(16 * 70, 9 * 70)));
+        SwingUtilities.invokeLater(() -> new Test("Intersections", new _1_TestPanel(16 * 70, 9 * 70, "Intersections")));
+        SwingUtilities.invokeLater(() -> new Test("Draw Primitives: Curves", new _2_TestPanel(16 * 70, 9 * 70, "Draw Primitives: Curves")));
+        SwingUtilities.invokeLater(() -> new Test("Animation: Expansion", new _3_TestPanel(16 * 70, 9 * 70, "Animation: Expansion")));
     }
 }

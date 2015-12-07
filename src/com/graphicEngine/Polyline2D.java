@@ -21,11 +21,14 @@ public class Polyline2D implements View {
     }
 
     @Override
-    public void show(Graphics graphics, Vector posScreen, int height, int width) {
-        Vector prev = polyline.pos();
+    public void show(Graphics graphics, Screen screen, Vector parentPos) {
+        Vector prev;
+        Vector current = parentPos.add(polyline.pos());
+        graphics.setColor(outlineColor);
         for (Vector vector : polyline.vectors()) {
-            new Section2D(prev, vector, outlineColor).show(graphics, posScreen, height, width);
-            prev = vector;
+            prev = current;
+            current = current.add(vector);
+            graphics.drawLine((int)(prev.x), (int)(prev.y), (int)(current.x), (int)(current.y));
         }
     }
 }

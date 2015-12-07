@@ -24,10 +24,10 @@ public class Ellipse2D implements View {
     }
 
     @Override
-    public void show(Graphics graphics, Vector posScreen, int height, int width) {
+    public void show(Graphics graphics, Screen screen, Vector parentPos) {
         graphics.setColor(outline);
         Vector size = new Vector(ellipse.width(), ellipse.height());
-        Vector temp = posScreen.add(ellipse.pos()).rem(size.mul(1.0/2));
+        Vector temp = parentPos.add(ellipse.pos()).rem(size.mul(1.0/2));
         graphics.drawOval((int)(temp.x), (int)(temp.y), (int)(size.x), (int)(size.y));
     }
 }
