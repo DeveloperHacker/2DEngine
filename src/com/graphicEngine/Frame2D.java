@@ -10,6 +10,10 @@ public class Frame2D implements View {
 
     private List<View> background;
 
+    public Frame2D() {
+        background = new ArrayList<>();
+    }
+
     public Frame2D(Frame2D frame) {
         background = new ArrayList<>(frame.background);
     }

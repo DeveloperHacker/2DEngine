@@ -52,7 +52,7 @@ public class Polyline {
         return false;
     }
 
-    public void set(Vector pos) {
+    public void moveTo(Vector pos) {
         this.pos = pos;
     }
 

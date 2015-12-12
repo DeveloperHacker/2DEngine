@@ -5,6 +5,7 @@ import com.abstractEngine.math.Vector;
 
 public class Atom {
     private Vector pos;
+    private Vector prevpos;
     private Figure mask;
     private double mass;
     private Vector speed;
@@ -13,6 +14,7 @@ public class Atom {
 
     public Atom(Atom atom, boolean movable) {
         this.pos = atom.pos;
+        this.prevpos = atom.pos;
         this.mask = atom.mask;
         this.mass = atom.mass;
         this.speed = atom.speed;
@@ -22,6 +24,7 @@ public class Atom {
 
     public Atom(Atom atom) {
         this.pos = atom.pos;
+        this.prevpos = atom.pos;
         this.mask = atom.mask;
         this.mass = atom.mass;
         this.speed = atom.speed;
@@ -31,6 +34,7 @@ public class Atom {
 
     public Atom(Vector pos, Figure mask, double mass, Vector speed, boolean movable, String name) {
         this.pos = pos;
+        this.prevpos = pos;
         this.mask = mask;
         this.mass = mass;
         this.speed = speed;
@@ -40,6 +44,7 @@ public class Atom {
 
     public Atom(Vector pos, Figure mask, double mass, boolean movable, String name) {
         this.pos = pos;
+        this.prevpos = pos;
         this.mask = mask;
         this.mass = mass;
         this.speed = new Vector();
@@ -52,6 +57,7 @@ public class Atom {
     }
 
     public void moveTo(Vector pos) {
+        this.prevpos = this.pos;
         this.pos = pos;
     }
 
@@ -70,6 +76,11 @@ public class Atom {
     public Vector pos() {
         return pos;
     }
+
+    public Vector prevpos() {
+        return prevpos;
+    }
+
 
     public double mass() {
         return mass;

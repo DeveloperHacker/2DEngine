@@ -125,7 +125,7 @@ public class Figure {
         return false;
     }
 
-    public void set(Vector pos) {
+    public void moveTo(Vector pos) {
         this.pos = pos;
     }
 
@@ -141,7 +141,7 @@ public class Figure {
         return new ArrayList<>(vectors);
     }
 
-    public Vector set(List<Vector> vectors) {
+    public Vector moveTo(List<Vector> vectors) {
         this.vectors = new ArrayList<>(vectors);
         center = calcCenter();
         return center;
