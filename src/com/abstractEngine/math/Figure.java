@@ -31,6 +31,10 @@ public class Figure {
         this.center = calcCenter();
     }
 
+    public Figure(List<Vector> vec) throws IllegalArgumentException {
+        this(new Vector(), vec);
+    }
+
     public boolean convex() {
         double direct = vectors.get(vectors.size() - 1).vectorMul(vectors.get(0));
         for (int i = 1; i < vectors.size(); ++i)
@@ -127,6 +131,7 @@ public class Figure {
 
     public void moveTo(Vector pos) {
         this.pos = pos;
+        this.center = calcCenter();
     }
 
     public Vector pos() {
@@ -141,7 +146,7 @@ public class Figure {
         return new ArrayList<>(vectors);
     }
 
-    public Vector moveTo(List<Vector> vectors) {
+    public Vector set(List<Vector> vectors) {
         this.vectors = new ArrayList<>(vectors);
         center = calcCenter();
         return center;
@@ -164,6 +169,59 @@ public class Figure {
         for (int i = 0; i < vectors.size(); ++i) {
             vectors.set(i, vectors.get(i).rotate(theta));
         }
+        this.center = calcCenter();
+    }
+
+    public Rectangle roundRectangle() {
+        return new Rectangle(new Vector(minX(), minY()), width(), height());
+    }
+
+    public double minX() {
+        double min = pos.x;
+        Vector current = pos;
+        for (Vector vector: vectors) {
+            current = current.add(vector);
+            if (current.x < min) {
+                min = current.x;
+            }
+        }
+        return min;
+    }
+
+    public double maxX() {
+        double max = pos.x;
+        Vector current = pos;
+        for (Vector vector: vectors) {
+            current = current.add(vector);
+            if (current.x < max) {
+                max = current.x;
+            }
+        }
+        return max;
+    }
+
+    public double minY() {
+        double min = pos.y;
+        Vector current = pos;
+        for (Vector vector: vectors) {
+            current = current.add(vector);
+            if (current.y < min) {
+                min = current.y;
+            }
+        }
+        return min;
+    }
+
+    public double maxY() {
+        double max = pos.y;
+        Vector current = pos;
+        for (Vector vector: vectors) {
+            current = current.add(vector);
+            if (current.y > max) {
+                max = current.y;
+            }
+        }
+        return max;
     }
 
     @Override

@@ -1,4 +1,4 @@
-package panels;
+import panels.*;
 
 import javax.swing.*;
 import java.awt.event.KeyAdapter;
@@ -81,8 +81,9 @@ public class Test extends JFrame {
 
     public static void main(String[] args) {
         List<TestPanel> testingPanels = new ArrayList<>();
-        testingPanels.add(new _1_AtomTestPanel(16 * 70, 9 * 70, "Intersections"));
-        testingPanels.add(new _2_AtomTestPanel(16 * 70, 9 * 70, "Intersections"));
+        testingPanels.add(new _1_AtomTestPanel(16 * 70, 9 * 70, "Gas"));
+        testingPanels.add(new _2_AtomTestPanel(16 * 70, 9 * 70, "Newton balls"));
+        testingPanels.add(new _3_AtomTestPanel(16 * 70, 9 * 70, "Comets"));
         testingPanels.add(new _1_ViewTestPanel(16 * 70, 9 * 70));
         testingPanels.add(new _2_ViewTestPanel(16 * 70, 9 * 70));
         SwingUtilities.invokeLater(() -> new Test(testingPanels, "Tests"));

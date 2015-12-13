@@ -17,11 +17,11 @@ public class TestPanel extends JPanel {
     public static final int repaintCycleTime = 10;
 
     public int width() {
-        return (int)(screen.width());
+        return (int) (screen.width());
     }
 
     public int height() {
-        return (int)(screen.height());
+        return (int) (screen.height());
     }
 
     public TestPanel(Screen screen) {

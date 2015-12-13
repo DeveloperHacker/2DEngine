@@ -11,7 +11,6 @@ public class Animation2D implements View {
 
     private List<Frame2D> frames;
     private int currentFrame = 0;
-    private int delay = 0;
     private int time = 0;
 
     public Animation2D(Animation2D animation) {
@@ -25,10 +24,6 @@ public class Animation2D implements View {
 
     public void set(List<Frame2D> frames) {
         this.frames = frames;
-    }
-
-    public void set(int delay) {
-        this.delay = delay;
     }
 
     public void add(Frame2D frame) {
@@ -72,7 +67,7 @@ public class Animation2D implements View {
     public void show(Graphics graphics, Screen screen, Vector parentPos) {
         if (frames.size() != 0) {
                 frames.get(currentFrame).show(graphics, screen, parentPos);
-                if (time == delay) {
+                if (time == frames.get(currentFrame).delay()) {
                     time = -1;
                     ++currentFrame;
                     if (currentFrame == frames.size()) currentFrame = 0;

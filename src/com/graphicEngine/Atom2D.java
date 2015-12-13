@@ -9,29 +9,29 @@ import java.awt.*;
 
 public class Atom2D extends ModelElement implements View {
 
-    public final Atom atom;
+    private final Atom atom;
     private View background;
 
     public Atom2D(Atom atom, View background) {
-        super(atom.name());
+        super(atom.pos(), atom.name());
         this.atom = new Atom(atom);
         this.background = background;
     }
 
     public Atom2D(Atom2D atom, View background) {
-        super(atom.name);
+        super(atom.pos(), atom.atom.name());
         this.atom =  atom.atom;
         this.background = background;
     }
 
     public Atom2D(Vector pos, Figure mask, double mass, Vector speed, boolean movable, View background, String name) {
-        super(name);
+        super(pos, name);
         atom = new Atom(pos, mask, mass, speed, movable, name);
         this.background = background;
     }
 
     public Atom2D(Vector pos, Figure mask, double mass, boolean movable, View background, String name) {
-        super(name);
+        super(pos, name);
         atom = new Atom(pos, mask, mass, movable, name);
         this.background = background;
     }
@@ -44,16 +44,16 @@ public class Atom2D extends ModelElement implements View {
         return background;
     }
 
-    public String name() {
-        return atom.name();
+    public Atom getAtom() {
+        return atom;
     }
 
     @Override
     public void show(Graphics graphics, Screen screen, Vector parentPos) {
-        Vector pos = atom.pos().rem(parentPos);
+        Vector pos = atom.pos().add(parentPos);
 //        new Figure2D(atom.mask(), Color.WHITE).show(graphics, screen, pos);
 //        graphics.setColor(Color.BLUE);
-//        graphics.drawLine(0, 0, (int)(pos.x), (int)(pos.y));
-        background.show(graphics, screen, parentPos.add(pos));
+//        graphics.drawLine((int) (parentPos.x), (int) (parentPos.y), (int)(pos.x), (int)(pos.y));
+        background.show(graphics, screen, pos);
     }
 }

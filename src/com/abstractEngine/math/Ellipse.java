@@ -38,6 +38,12 @@ public class Ellipse {
         return width;
     }
 
+    public void scale(double scale) {
+        pos = pos.mul(scale);
+        height *= scale;
+        width *= scale;
+    }
+
     public Figure toFigure(Integer quantityVertex) {
         return new Figure(pos().add(new Vector(0, -height / 2)), generateOutline(quantityVertex));
     }

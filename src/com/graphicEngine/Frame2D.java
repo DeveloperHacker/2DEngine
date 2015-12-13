@@ -9,6 +9,7 @@ import java.util.List;
 public class Frame2D implements View {
 
     private List<View> background;
+    private double delay = 0;
 
     public Frame2D() {
         background = new ArrayList<>();
@@ -33,6 +34,14 @@ public class Frame2D implements View {
 
     public void add(View model) {
         background.add(model);
+    }
+
+    public void set(double delay) {
+        this.delay = delay;
+    }
+
+    public double delay() {
+        return delay;
     }
 
     @Override

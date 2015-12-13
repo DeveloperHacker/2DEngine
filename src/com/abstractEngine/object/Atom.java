@@ -5,7 +5,6 @@ import com.abstractEngine.math.Vector;
 
 public class Atom {
     private Vector pos;
-    private Vector prevpos;
     private Figure mask;
     private double mass;
     private Vector speed;
@@ -13,28 +12,15 @@ public class Atom {
     private final String name;
 
     public Atom(Atom atom, boolean movable) {
-        this.pos = atom.pos;
-        this.prevpos = atom.pos;
-        this.mask = atom.mask;
-        this.mass = atom.mass;
-        this.speed = atom.speed;
-        this.name = atom.name;
-        this.movable = movable;
+        this(atom.pos, atom.mask, atom.mass, atom.speed, movable, atom.name);
     }
 
     public Atom(Atom atom) {
-        this.pos = atom.pos;
-        this.prevpos = atom.pos;
-        this.mask = atom.mask;
-        this.mass = atom.mass;
-        this.speed = atom.speed;
-        this.name = atom.name;
-        this.movable = atom.movable;
+        this(atom.pos, atom.mask, atom.mass, atom.speed, atom.movable, atom.name);
     }
 
     public Atom(Vector pos, Figure mask, double mass, Vector speed, boolean movable, String name) {
         this.pos = pos;
-        this.prevpos = pos;
         this.mask = mask;
         this.mass = mass;
         this.speed = speed;
@@ -43,13 +29,7 @@ public class Atom {
     }
 
     public Atom(Vector pos, Figure mask, double mass, boolean movable, String name) {
-        this.pos = pos;
-        this.prevpos = pos;
-        this.mask = mask;
-        this.mass = mass;
-        this.speed = new Vector();
-        this.name = name;
-        this.movable = movable;
+        this(pos, mask, mass, new Vector(), movable, name);
     }
 
     public void set(Figure mask) {
@@ -57,7 +37,6 @@ public class Atom {
     }
 
     public void moveTo(Vector pos) {
-        this.prevpos = this.pos;
         this.pos = pos;
     }
 
@@ -77,11 +56,6 @@ public class Atom {
         return pos;
     }
 
-    public Vector prevpos() {
-        return prevpos;
-    }
-
-
     public double mass() {
         return mass;
     }
@@ -100,7 +74,8 @@ public class Atom {
 
     public boolean clash(Atom atom, double xDamping, double yDamping) {
 
-        boolean intersection = Figure.intersection(new Figure(pos.add(mask.pos()), mask), new Figure(atom.pos.add(atom.mask.pos()), atom.mask));
+        boolean intersection = Figure.intersection(new Figure(pos.add(mask.pos()), mask),
+                new Figure(atom.pos.add(atom.mask.pos()), atom.mask));
         if (mask().convex() && atom.mask().convex()) {
             if (intersection) {
                 Vector n = new Vector((mask.center().add(pos)).rem(atom.mask.center().add(atom.pos)));

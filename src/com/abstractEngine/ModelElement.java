@@ -5,13 +5,14 @@ import com.graphicEngine.Screen;
 
 import java.awt.*;
 
-public abstract class ModelElement<T> {
+public abstract class ModelElement {
 
     public final String name;
     protected Vector pos;
 
-    public ModelElement(String name) {
+    public ModelElement(Vector pos, String name) {
         this.name = name;
+        this.pos = pos;
     }
 
     abstract public void show(Graphics graphics, Screen screen, Vector parentPos);
