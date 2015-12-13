@@ -63,7 +63,7 @@ public class CurveBezier implements Curve{
             prev = current;
             current = new Vector();
             for (int i = 0; i < size; ++i) {
-                current = current.add(points.get(i).mul(koef[i] * Math.pow(1 - way, size - i - 1) * Math.pow(way, i)));
+                current = current.add(points.get(i).scale(koef[i] * Math.pow(1 - way, size - i - 1) * Math.pow(way, i)));
             }
             vectors.add(current.rem(prev));
             way += step;
@@ -72,7 +72,7 @@ public class CurveBezier implements Curve{
     }
 
     @Override
-    public Polyline generatrix() {
+    public Polyline getGuidePolyline() {
         List<Vector> vectors = new ArrayList<>();
         Vector pos = points.get(0);
         Vector prev;

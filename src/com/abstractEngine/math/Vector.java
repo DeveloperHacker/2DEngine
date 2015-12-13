@@ -32,7 +32,7 @@ public class Vector {
         return new Vector(x - vector.x, y - vector.y);
     }
 
-    public Vector mul(double num) {
+    public Vector scale(double num) {
         return new Vector(x * num, y * num);
     }
 
@@ -48,7 +48,7 @@ public class Vector {
         return dot(vector) / (abs() * vector.abs());
     }
 
-    public double vectorMul(Vector vector) {
+    public double mul(Vector vector) {
         return x * vector.y - vector.x * y;
     }
 

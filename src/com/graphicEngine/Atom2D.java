@@ -51,9 +51,9 @@ public class Atom2D extends ModelElement implements View {
     @Override
     public void show(Graphics graphics, Screen screen, Vector parentPos) {
         Vector pos = atom.pos().add(parentPos);
-//        new Figure2D(atom.mask(), Color.WHITE).show(graphics, screen, pos);
+//        new Figure2D(atom.mask(), Color.WHITE).show(graphics, screen, getPosition);
 //        graphics.setColor(Color.BLUE);
-//        graphics.drawLine((int) (parentPos.x), (int) (parentPos.y), (int)(pos.x), (int)(pos.y));
+//        graphics.drawLine((int) (parentPos.x), (int) (parentPos.y), (int)(getPosition.x), (int)(getPosition.y));
         background.show(graphics, screen, pos);
     }
 }

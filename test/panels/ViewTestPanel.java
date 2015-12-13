@@ -1,6 +1,7 @@
 package panels;
 
 import com.graphicEngine.*;
+import com.abstractEngine.math.Vector;
 
 import java.awt.*;
 import java.util.*;
@@ -35,7 +36,7 @@ abstract class ViewTestPanel extends TestPanel {
     @Override
     public void paint(Graphics graphics) {
         super.paint(graphics);
-        frame2D.show(graphics, screen, new com.abstractEngine.math.Vector());
+        frame2D.show(graphics, screen, screen.pos());
     }
 }
 

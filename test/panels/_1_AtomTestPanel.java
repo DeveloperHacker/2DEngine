@@ -30,7 +30,7 @@ public class _1_AtomTestPanel extends AtomTestPanel {
         Vector pos;
         int quantityBalls = 5;
         for (int i = 1; i < quantityBalls + 1; ++i) {
-            mass  = Math.random() * 90 + 10;
+            mass = Math.random() * 90 + 10;
             temp = new Ellipse(circle);
             temp.scale(mass);
             mask = temp.toFigure(20);

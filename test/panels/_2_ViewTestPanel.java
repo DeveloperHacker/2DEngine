@@ -2,11 +2,11 @@ package panels;
 
 import com.abstractEngine.math.Figure;
 import com.abstractEngine.math.RightFigure;
+import com.abstractEngine.math.Section;
 import com.abstractEngine.math.Vector;
 import com.graphicEngine.*;
 
 import java.awt.*;
-import java.awt.List;
 import java.util.*;
 
 public class _2_ViewTestPanel extends ViewTestPanel {
@@ -65,5 +65,8 @@ public class _2_ViewTestPanel extends ViewTestPanel {
         } while (t > 0);
         Animation2D animation2D = new Animation2D(frames);
         add(animation2D);
+
+        add(new Line2D(new Section(new Vector(800, 100), new Vector(1000, 400)), randColor()));
+        add(new Section2D(new Vector(1000, 100), new Vector(800, 400), randColor()));
     }
 }

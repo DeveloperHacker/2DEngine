@@ -47,12 +47,12 @@ public class Animation2D implements View {
         List<Vector> vectors = new ArrayList<>(vectors1.size());
         Vector prev1 = new Vector(_1.pos());
         Vector prev2 = new Vector(_2.pos());
-        Vector prev = (prev1.mul(1 - t)).add(prev2.mul(t));
+        Vector prev = (prev1.scale(1 - t)).add(prev2.scale(t));
         for (int i = 0; i < vectors1.size(); i++) {
             prev1 = prev1.add(vectors1.get(i));
             prev2 = prev2.add(vectors2.get(i));
-            vectors.add(((prev1.mul(1 - t)).add(prev2.mul(t))).rem(prev));
-            prev = (prev1.mul(1 - t)).add(prev2.mul(t));
+            vectors.add(((prev1.scale(1 - t)).add(prev2.scale(t))).rem(prev));
+            prev = (prev1.scale(1 - t)).add(prev2.scale(t));
         }
         return new Figure(prev, vectors);
     }

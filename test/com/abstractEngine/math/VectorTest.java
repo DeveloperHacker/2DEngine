@@ -17,7 +17,7 @@ public class VectorTest {
                     && vector1.cos(vector4) >= 0.5 - Vector.EPSILON);
             assert (vector1.cos(vector3) <= 0 + Vector.EPSILON
                     && vector1.cos(vector3) >= 0 - Vector.EPSILON);
-            assert (vector1.vectorMul(vector3) == 136);
+            assert (vector1.mul(vector3) == 136);
             assert (vector1.dot(vector3) == 0);
             assert (vector1.dot(vector4) == 60);
             assert (vector1.add(vector4).equals(new Vector(10, 16)));

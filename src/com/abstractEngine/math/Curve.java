@@ -4,5 +4,5 @@ public interface Curve {
 
     Polyline toPolyline(double step);
 
-    Polyline generatrix();
+    Polyline getGuidePolyline();
 }

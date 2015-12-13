@@ -34,27 +34,27 @@ public class Gas extends Model {
                 atom.set(atom.speed().add(G));
                 if (element.pos().add(atom.pos()).y <= 0) {
                     if (atom.speed().y < 0) {
-                        atom.set(new Vector(atom.speed().x, -atom.speed().y).mul(xDamping));
+                        atom.set(new Vector(atom.speed().x, -atom.speed().y).scale(xDamping));
                     }
                 }
                 if (element.pos().add(atom.pos()).y >= height - atom.mask().height()) {
                     if (atom.speed().y > 0) {
                         atom.set(atom.speed().rem(G));
-                        atom.set(new Vector(atom.speed().x, -atom.speed().y).mul(xDamping));
+                        atom.set(new Vector(atom.speed().x, -atom.speed().y).scale(xDamping));
                     }
                 }
                 if (element.pos().add(atom.pos()).x <= 0) {
                     if (atom.speed().x < 0) {
-                        atom.set(new Vector(-atom.speed().x, atom.speed().y).mul(yDamping));
+                        atom.set(new Vector(-atom.speed().x, atom.speed().y).scale(yDamping));
                     }
                 }
                 if (element.pos().add(atom.pos()).x >= width - atom.mask().width()) {
                     if (atom.speed().x > 0) {
-                        atom.set(new Vector(-atom.speed().x, atom.speed().y).mul(yDamping));
+                        atom.set(new Vector(-atom.speed().x, atom.speed().y).scale(yDamping));
                     }
                 }
                 if (atom.speed().abs() > maxSpeed) {
-                    atom.set(atom.speed().mul(maxSpeed / atom.speed().abs()));
+                    atom.set(atom.speed().scale(maxSpeed / atom.speed().abs()));
                 }
             }
         }

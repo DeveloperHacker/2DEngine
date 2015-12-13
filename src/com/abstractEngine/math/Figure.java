@@ -36,9 +36,9 @@ public class Figure {
     }
 
     public boolean convex() {
-        double direct = vectors.get(vectors.size() - 1).vectorMul(vectors.get(0));
+        double direct = vectors.get(vectors.size() - 1).mul(vectors.get(0));
         for (int i = 1; i < vectors.size(); ++i)
-            if (0 > direct * vectors.get(i - 1).vectorMul(vectors.get(i)))
+            if (0 > direct * vectors.get(i - 1).mul(vectors.get(i)))
                 return false;
         return true;
     }
@@ -73,7 +73,7 @@ public class Figure {
         double temp;
         boolean init = false;
         for (Vector vector : vectors) {
-            temp = vector.vectorMul(m);
+            temp = vector.mul(m);
             m = m.rem(vector);
             if (temp != 0) {
                 if (!init) {
@@ -158,9 +158,9 @@ public class Figure {
 
     public void scale(Vector origin, double scale) {
         Vector pos = new Vector(this.pos);
-        this.pos = pos.rem(origin).mul(scale).add(origin);
+        this.pos = pos.rem(origin).scale(scale).add(origin);
         for (int i = 0; i < vectors.size(); ++i) {
-            vectors.set(i, vectors.get(i).mul(scale));
+            vectors.set(i, vectors.get(i).scale(scale));
         }
     }
 

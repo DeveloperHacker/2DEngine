@@ -26,26 +26,26 @@ public class Ellipse {
         this.width = rectangle.width();
     }
 
-    public Vector pos() {
+    public Vector getPosition() {
         return pos;
     }
 
-    public double height() {
+    public double getHeight() {
         return height;
     }
 
-    public double width() {
+    public double getWidth() {
         return width;
     }
 
     public void scale(double scale) {
-        pos = pos.mul(scale);
+        pos = pos.scale(scale);
         height *= scale;
         width *= scale;
     }
 
     public Figure toFigure(Integer quantityVertex) {
-        return new Figure(pos().add(new Vector(0, -height / 2)), generateOutline(quantityVertex));
+        return new Figure(getPosition().add(new Vector(0, -height / 2)), generateOutline(quantityVertex));
     }
 
     private List<Vector> generateOutline(Integer quantityVertex) {
@@ -64,7 +64,7 @@ public class Ellipse {
             generatrix = new Vector(-a * b / Math.sqrt(a * a * tg * tg + b * b),
                     a * b / Math.sqrt(a * a + b * b * ctg * ctg));
             nextRadius = prevRadius.rotate(Math.PI * 2 / quantityVertex);
-            nextRadius = nextRadius.mul(1/nextRadius.abs()).mul(generatrix.abs());
+            nextRadius = nextRadius.scale(1/nextRadius.abs()).scale(generatrix.abs());
             vectors.add(nextRadius.rem(prevRadius));
             prevRadius = nextRadius;
         }

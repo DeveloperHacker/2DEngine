@@ -53,6 +53,6 @@ public class Model extends ModelElement {
         }
         background.show(graphics, screen, parentPos.add(pos));
 //        graphics.setColor(Color.BLUE);
-//        graphics.drawLine((int) (parentPos.x), (int) (parentPos.y), (int)(pos.x), (int)(pos.y));
+//        graphics.drawLine((int) (parentPos.x), (int) (parentPos.y), (int)(getPosition.x), (int)(getPosition.y));
     }
 }

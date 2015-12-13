@@ -40,6 +40,12 @@ public class Line {
         return -B / A * y - C / A;
     }
 
+    public Line moveTo(Vector M) {
+        Vector projection = new Vector(M.x, y(M.x));
+        double dy = M.y - projection.y;
+        return new Line(A, B, -(dy + y(0)) * B);
+    }
+
     public static boolean intersection(Line _1, Line _2) {
         return (_1.equals(_2)) || (_1.A * _2.B != _1.B * _2.A);
     }
