@@ -45,7 +45,7 @@ public class Frame2D implements View {
     }
 
     @Override
-    public void show(Graphics graphics, Screen screen, Vector parentPos) {
-        for (View model : background) model.show(graphics, screen, parentPos);
+    public void drawOutline(Graphics graphics, Screen screen, Vector parentPos) {
+        for (View model : background) model.drawOutline(graphics, screen, parentPos);
     }
 }

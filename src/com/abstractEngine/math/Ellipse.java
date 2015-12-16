@@ -14,7 +14,7 @@ public class Ellipse {
         this.width = ellipse.width;
     }
 
-    public Ellipse(Vector pos, double height, double width) {
+    public Ellipse(Vector pos, double width, double height) {
         this.pos = pos;
         this.height = height;
         this.width = width;
@@ -44,29 +44,25 @@ public class Ellipse {
         width *= scale;
     }
 
-    public Figure toFigure(Integer quantityVertex) {
+    public Figure toFigure(int quantityVertex) {
         return new Figure(getPosition().add(new Vector(0, -height / 2)), generateOutline(quantityVertex));
     }
 
-    private List<Vector> generateOutline(Integer quantityVertex) {
-        List<Vector> vectors = new ArrayList<>();
-        double a = height / 2;
-        double b = width / 2;
-        double tg, ctg;
-        double beta;
-        Vector prevRadius = new Vector(0, -a);
-        Vector nextRadius;
-        Vector generatrix;
-        for(int i = 0; i < quantityVertex; ++i) {
-            beta = (i + 1) * Math.PI * 2 / quantityVertex;
-            tg = Math.tan(beta);
-            ctg = 1 / tg;
-            generatrix = new Vector(-a * b / Math.sqrt(a * a * tg * tg + b * b),
-                    a * b / Math.sqrt(a * a + b * b * ctg * ctg));
-            nextRadius = prevRadius.rotate(Math.PI * 2 / quantityVertex);
-            nextRadius = nextRadius.scale(1/nextRadius.abs()).scale(generatrix.abs());
-            vectors.add(nextRadius.rem(prevRadius));
-            prevRadius = nextRadius;
+    private List<Vector> generateOutline(int quantityVertex) {
+        double radius = Math.max(width, height) / 2;
+        boolean horizontal = (width > height);
+        List<Vector> vectors = new RightFigure(new Vector(), quantityVertex, radius).vectors();
+        Vector currentVector;
+        if (horizontal) {
+            for (int i = 0; i < vectors.size(); ++i) {
+                currentVector = vectors.get(i);
+                vectors.set(i, new Vector(currentVector.x, currentVector.y * height / width));
+            }
+        } else {
+            for (int i = 0; i < vectors.size(); ++i) {
+                currentVector = vectors.get(i);
+                vectors.set(i, new Vector(currentVector.x * width / height, currentVector.y));
+            }
         }
         return vectors;
     }

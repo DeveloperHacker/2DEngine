@@ -1,6 +1,6 @@
 package models;
 
-import com.abstractEngine.ModelElement;
+import com.graphicEngine.ModelElement;
 import com.abstractEngine.math.Vector;
 
 import java.util.ArrayList;
@@ -25,8 +25,10 @@ public class Comets extends Gas {
     @Override
     public void update() {
         super.update();
-        for (Comet comet : comets) {
-            comet.update();
+        synchronized (comets) {
+            for (Comet comet : comets) {
+                comet.update();
+            }
         }
     }
 }

@@ -25,7 +25,7 @@ public class Section2D implements View {
     }
 
     @Override
-    public void show(Graphics graphics, Screen screen, Vector parentPos) {
+    public void drawOutline(Graphics graphics, Screen screen, Vector parentPos) {
         graphics.setColor(outlineColor);
         graphics.drawLine((int) (section._1.x + parentPos.x), (int) (section._1.y + parentPos.y),
                 (int) (section._2.x + parentPos.x), (int) (section._2.y + parentPos.y));

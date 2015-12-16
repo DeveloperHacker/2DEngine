@@ -3,7 +3,7 @@ package panels;
 import com.abstractEngine.math.Ellipse;
 import com.abstractEngine.math.Figure;
 import com.abstractEngine.math.Vector;
-import com.abstractEngine.object.Atom;
+import com.abstractEngine.physics.Atom;
 import com.graphicEngine.Atom2D;
 import com.graphicEngine.Ellipse2D;
 import com.graphicEngine.Frame2D;

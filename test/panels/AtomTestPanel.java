@@ -1,6 +1,6 @@
 package panels;
 
-import com.graphicEngine.Model;
+import com.graphicEngine.Model2D;
 import com.graphicEngine.*;
 import models.SingleElement;
 
@@ -14,13 +14,13 @@ public abstract class AtomTestPanel extends TestPanel {
     protected Timer updateClock;
     protected ActionListener updateClockListener;
     public static final int cycleTime = 10;
-    protected Model model;
+    protected Model2D model2D;
 
-    public AtomTestPanel(Model model, Screen screen) {
+    public AtomTestPanel(Model2D model2D, Screen screen) {
         super(screen);
-        this.model = model;
+        this.model2D = model2D;
 
-        updateClockListener = timeEvent -> model.update();
+        updateClockListener = timeEvent -> model2D.update();
         updateClock = new Timer(cycleTime, updateClockListener);
         updateClock.start();
 
@@ -31,7 +31,7 @@ public abstract class AtomTestPanel extends TestPanel {
     }
 
     public void addElement(SingleElement element) {
-        model.addElement(element);
+        model2D.addElement(element);
     }
 
     public static Color randColor() {
@@ -46,7 +46,7 @@ public abstract class AtomTestPanel extends TestPanel {
     @Override
     public void paint(Graphics graphics) {
         super.paint(graphics);
-        model.show(graphics, screen, new com.abstractEngine.math.Vector());
+        model2D.drawOutline(graphics, screen, new com.abstractEngine.math.Vector());
     }
 }
 

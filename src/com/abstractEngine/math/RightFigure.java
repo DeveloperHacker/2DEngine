@@ -9,15 +9,15 @@ public class RightFigure extends Figure {
         super(figure.pos(), figure.vectors());
     }
 
-    public RightFigure(Vector pos, Integer quantityVertex, double radius, double alpha) {
+    public RightFigure(Vector pos, int quantityVertex, double radius, double alpha) {
         super(pos, generateOutline(quantityVertex, radius, alpha));
     }
 
-    public RightFigure(Vector pos, Integer quantityVertex, double radius) {
+    public RightFigure(Vector pos, int quantityVertex, double radius) {
         super(pos, generateOutline(quantityVertex, radius, 0));
     }
 
-    private static List<Vector> generateOutline(Integer quantityVertex, double radius, double alpha) {
+    private static List<Vector> generateOutline(int quantityVertex, double radius, double alpha) {
         List<Vector> vectors = new ArrayList<>();
         Vector prevRadius = new Vector(0, - radius).rotate(alpha);
         Vector nextRadius;

@@ -85,7 +85,10 @@ public class Test extends JFrame {
         testingPanels.add(new _2_AtomTestPanel(16 * 70, 9 * 70, "Newton balls"));
         testingPanels.add(new _3_AtomTestPanel(16 * 70, 9 * 70, "Comets"));
         testingPanels.add(new _1_ViewTestPanel(16 * 70, 9 * 70));
+        testingPanels.add(new _4_ViewTestPanel(16 * 70, 9 * 70));
+        testingPanels.add(new _5_ViewTestPanel(16 * 70, 9 * 70));
         testingPanels.add(new _2_ViewTestPanel(16 * 70, 9 * 70));
+        testingPanels.add(new _3_ViewTestPanel(16 * 70, 9 * 70));
         SwingUtilities.invokeLater(() -> new Test(testingPanels, "Tests"));
     }
 }

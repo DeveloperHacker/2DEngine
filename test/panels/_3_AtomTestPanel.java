@@ -22,7 +22,7 @@ public class _3_AtomTestPanel extends AtomTestPanel {
         Comet comet;
         Vector pos;
         double dumping = 0.99;
-        int quantityComets = 3;
+        int quantityComets = 5;
         int lengthTail = 100;
         for (int i = 1; i < quantityComets + 1; ++i) {
             speed = new Vector(Math.random() * 20 - 10, Math.random() * 20 - 10);
@@ -31,8 +31,8 @@ public class _3_AtomTestPanel extends AtomTestPanel {
             for (int j = 0; j < lengthTail; ++j) {
                 comet.addTailElement();
             }
-            comet.setColorHead(randColor());
-            comet.setColorTail(randColor());
+            comet.setOutlineHeadColor(randColor());
+            comet.setOutlineTailColor(comet.getOutlineHeadColor());
             addElement(comet);
         }
     }

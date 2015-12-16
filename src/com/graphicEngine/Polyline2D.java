@@ -21,7 +21,7 @@ public class Polyline2D implements View {
     }
 
     @Override
-    public void show(Graphics graphics, Screen screen, Vector parentPos) {
+    public void drawOutline(Graphics graphics, Screen screen, Vector parentPos) {
         Vector prev;
         Vector current = parentPos.add(polyline.pos());
         graphics.setColor(outlineColor);

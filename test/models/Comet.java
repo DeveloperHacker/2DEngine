@@ -2,7 +2,7 @@ package models;
 
 import com.abstractEngine.math.Figure;
 import com.abstractEngine.math.Vector;
-import com.abstractEngine.object.Atom;
+import com.abstractEngine.physics.Atom;
 import com.graphicEngine.Atom2D;
 import com.graphicEngine.Figure2D;
 
@@ -18,16 +18,20 @@ public class Comet extends SingleElement {
     private Vector prevPos;
 
     public static final Color defaultCOLOR = Color.WHITE;
-    private Color tailColor;
-    private Color headColor;
+    private Color outlineTailColor;
+    private Color outlineHeadColor;
+    private Color fillTailColor;
+    private Color fillHeadColor;
 
     public Comet(Figure head, double dumping, Vector pos, double mass, Vector speed, String name) {
         super(pos, initAtom2D(head, defaultCOLOR, new Vector(), mass, speed, name), name);
         this.prevPos = pos;
         this.tail = new ArrayList<>();
         this.dumping = dumping;
-        this.tailColor = defaultCOLOR;
-        this.headColor = defaultCOLOR;
+        this.outlineTailColor = defaultCOLOR;
+        this.outlineHeadColor = defaultCOLOR;
+        this.fillTailColor = defaultCOLOR;
+        this.fillHeadColor = defaultCOLOR;
         this.head = (Figure2D) (getAtom().background());
     }
 
@@ -40,16 +44,44 @@ public class Comet extends SingleElement {
         this(head, dumping, pos, mass, new Vector(), name);
     }
 
-    public void setColorHead(Color color) {
-        headColor = color;
-        head.set(headColor);
+    public void setOutlineHeadColor(Color color) {
+        outlineHeadColor = color;
+        head.setOutlineColor(outlineHeadColor);
     }
 
-    public void setColorTail(Color color) {
-        tailColor = color;
+    public void setOutlineTailColor(Color color) {
+        outlineTailColor = color;
         for (Figure2D figure : tail) {
-            figure.set(tailColor);
+            figure.setOutlineColor(outlineTailColor);
         }
+    }
+
+    public void setFillHeadColor(Color color) {
+        fillHeadColor = color;
+        head.setFillColor(fillHeadColor);
+    }
+
+    public void setFillTailColor(Color color) {
+        fillTailColor = color;
+        for (Figure2D figure : tail) {
+            figure.setFillColor(fillTailColor);
+        }
+    }
+
+    public Color getOutlineTailColor() {
+        return outlineTailColor;
+    }
+
+    public Color getOutlineHeadColor() {
+        return outlineHeadColor;
+    }
+
+    public Color getFillTailColor() {
+        return fillTailColor;
+    }
+
+    public Color getFillHeadColor() {
+        return fillHeadColor;
     }
 
     public Figure2D getHead() {
@@ -68,7 +100,7 @@ public class Comet extends SingleElement {
             newSegment = head.figure.clone();
         }
         newSegment.scale(newSegment.center(), dumping);
-        tail.add(new Figure2D(newSegment, tailColor));
+        tail.add(new Figure2D(newSegment, outlineTailColor));
         background.add(tail.get(tail.size() - 1));
     }
 

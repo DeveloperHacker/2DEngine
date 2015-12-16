@@ -64,15 +64,15 @@ public class Animation2D implements View {
     }
 
     @Override
-    public void show(Graphics graphics, Screen screen, Vector parentPos) {
+    public void drawOutline(Graphics graphics, Screen screen, Vector parentPos) {
         if (frames.size() != 0) {
-                frames.get(currentFrame).show(graphics, screen, parentPos);
-                if (time == frames.get(currentFrame).delay()) {
-                    time = -1;
-                    ++currentFrame;
-                    if (currentFrame == frames.size()) currentFrame = 0;
-                }
-                time++;
+            frames.get(currentFrame).drawOutline(graphics, screen, parentPos);
+            if (time == frames.get(currentFrame).delay()) {
+                time = -1;
+                ++currentFrame;
+                if (currentFrame == frames.size()) currentFrame = 0;
+            }
+            time++;
         }
     }
 }

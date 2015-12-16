@@ -1,13 +1,12 @@
 package com.graphicEngine;
 
-import com.abstractEngine.ModelElement;
 import com.abstractEngine.math.Figure;
 import com.abstractEngine.math.Vector;
-import com.abstractEngine.object.Atom;
+import com.abstractEngine.physics.Atom;
 
 import java.awt.*;
 
-public class Atom2D extends ModelElement implements View {
+public class Atom2D extends ModelElement {
 
     private final Atom atom;
     private View background;
@@ -20,7 +19,7 @@ public class Atom2D extends ModelElement implements View {
 
     public Atom2D(Atom2D atom, View background) {
         super(atom.pos(), atom.atom.name());
-        this.atom =  atom.atom;
+        this.atom = atom.atom;
         this.background = background;
     }
 
@@ -49,11 +48,11 @@ public class Atom2D extends ModelElement implements View {
     }
 
     @Override
-    public void show(Graphics graphics, Screen screen, Vector parentPos) {
+    public void drawOutline(Graphics graphics, Screen screen, Vector parentPos) {
         Vector pos = atom.pos().add(parentPos);
-//        new Figure2D(atom.mask(), Color.WHITE).show(graphics, screen, getPosition);
+//        new Figure2D(atom.mask(), Color.WHITE).drawOutline(graphics, screen, getPosition);
 //        graphics.setColor(Color.BLUE);
 //        graphics.drawLine((int) (parentPos.x), (int) (parentPos.y), (int)(getPosition.x), (int)(getPosition.y));
-        background.show(graphics, screen, pos);
+        background.drawOutline(graphics, screen, pos);
     }
 }

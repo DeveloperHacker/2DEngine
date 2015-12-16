@@ -1,10 +1,10 @@
 package models;
 
-import com.graphicEngine.Model;
+import com.graphicEngine.Model2D;
 import com.abstractEngine.math.Vector;
 import com.graphicEngine.Atom2D;
 
-public class SingleElement extends Model {
+public class SingleElement extends Model2D {
 
     private Atom2D atom;
 

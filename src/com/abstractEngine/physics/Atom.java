@@ -1,4 +1,4 @@
-package com.abstractEngine.object;
+package com.abstractEngine.physics;
 
 import com.abstractEngine.math.Figure;
 import com.abstractEngine.math.Vector;
